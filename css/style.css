@@ -618,8 +618,9 @@ header .search-bar-container label:hover {
   border-top: 0.1rem solid rgba(255, 255, 255, 0.2);
 }
 
-.footer .credit span {
+.footer .credit span a {
   color: var(--orange);
+  text-transform: none;
 }
 
 /* media queries */
