@@ -77,11 +77,21 @@ header {
   padding: 2rem 9%;
 }
 
-header .logo {
+header .wraped_logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header .wraped_logo .logo {
   font-size: 2.5rem;
   font-weight: bolder;
   color: #fff;
+  margin-left: 10px;
   /* text-transform: uppercase; */
+}
+header img {
+  width: 50px;
 }
 
 header .logo span {
@@ -606,12 +616,6 @@ header .search-bar-container label:hover {
   font-weight: normal;
   color: #fff;
   border-top: 0.1rem solid rgba(255, 255, 255, 0.2);
-}
-
-.footer .credit span a {
-  text-decoration: none;
-  color: #ffa500;
-  text-transform: none;
 }
 
 .footer .credit span {
