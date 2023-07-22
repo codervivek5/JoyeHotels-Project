@@ -608,6 +608,12 @@ header .search-bar-container label:hover {
   border-top: 0.1rem solid rgba(255, 255, 255, 0.2);
 }
 
+.footer .credit span a {
+  text-decoration: none;
+  color: #ffa500;
+  text-transform: none;
+}
+
 .footer .credit span {
   color: var(--orange);
 }
