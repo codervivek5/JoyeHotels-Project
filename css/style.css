@@ -74,7 +74,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 9%;
+  padding: 0.8rem 9%;
 }
 
 header .wraped_logo {
