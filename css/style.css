@@ -594,6 +594,7 @@ header .search-bar-container label:hover {
   font-size: 1.5rem;
   padding: 0.7rem 0;
   color: #eee;
+  width: 30rem;
 }
 
 .footer .box-container .box a {
