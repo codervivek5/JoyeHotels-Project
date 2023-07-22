@@ -77,7 +77,7 @@ header {
   padding: 0.8rem 9%;
 }
 
-header .wraped_logo {
+header .wraped_logo a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,10 +88,10 @@ header .wraped_logo .logo {
   font-weight: bolder;
   color: #fff;
   margin-left: 10px;
-  /* text-transform: uppercase; */
 }
 header img {
   width: 50px;
+  margin-right: 10px;
 }
 
 header .logo span {
