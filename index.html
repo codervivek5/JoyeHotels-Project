@@ -480,18 +480,19 @@
             <div class="img">
                 <img decoding="async" src="img/contact-img.svg" alt="">
             </div>
-            <form action="">
+            <form>
                 <div class="inputBox">
-                    <input type="text" placeholder="name">
-                    <input type="email" placeholder="email">
+                    <input type="text" placeholder="name" name="name" id="name">
+                    <input type="email" placeholder="email" name="email" id="email">
                 </div>
                 <div class="inputBox">
-                    <input type="number" placeholder="number">
-                    <input type="text" placeholder="subject">
+                    <input type="number" placeholder="number" name="number" id="number">
+                    <input type="text" placeholder="subject" name="subject" id="subject">
                 </div>
-                <textarea placeholder="message" name="" cols="30" rows="10"></textarea>
-                <input type="submit" class="btn" value="send message">
+                <textarea placeholder="message" name="message" id="message" cols="46" rows="10"></textarea>
+                <input type="submit" onClick="sendWhatsapp()" class="btn" value="send message">
             </form>
+
         </div>
     </section>
 
@@ -606,6 +607,7 @@
 
     <script src="js/script.js" defer data-deferred="1"></script>
     <script src="js/bookForm.js"></script>
+    <script src="js/contact.js"></script>
 </body>
 
 </html>

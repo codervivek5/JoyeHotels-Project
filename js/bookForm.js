@@ -5,9 +5,9 @@ function sendWA() {
     let checkOutDate = document.getElementById("checkOutDate");
     let mobileNumber = "917393017587"; //Enter your mobile number here
 
-    if (guest.value.trim() == "") {
-        guest.style.background = "lightpink";
-        guest.style.border = "4px solid red";
+    if (place.value.trim() == "") {
+        place.style.background = "lightpink";
+        place.style.border = "4px solid red";
         alert("Please Enter your guest");
         return false;
     }
