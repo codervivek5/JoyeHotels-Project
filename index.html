@@ -531,24 +531,30 @@
                 <img decoding="async" src="img/book-img.svg" alt="">
             </div>
 
-            <form action="">
+            <form onsubmit="return validate()" action="https://formsubmit.co/codervivek5@gmail.com" method="POST">
                 <div class="inputBox">
+
+                    <input type="hidden" name="_subject" value="New submission!">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="text" name="_honey" style="display:none">
+                    <input type="hidden" name="_template" value="table">
+
                     <h3>where to</h3>
-                    <input type="text" placeholder="place name">
+                    <input type="text" name="Place" id="place" placeholder="place name">
                 </div>
                 <div class="inputBox">
                     <h3>how many</h3>
-                    <input type="number" placeholder="number of guests">
+                    <input type="number" name="Number of guests" id="numberOfGuests" placeholder="number of guests">
                 </div>
                 <div class="inputBox">
                     <h3>arrivals</h3>
-                    <input type="date">
+                    <input type="date" name="Check in date" id="checkInDate">
                 </div>
                 <div class="inputBox">
                     <h3>leaving</h3>
-                    <input type="date">
+                    <input type="date" name="Check out date" id="checkOutDate">
                 </div>
-                <input type="submit" class="btn" value="book now">
+                <input type="submit" onClick="sendWA()" class="btn" value="book now">
             </form>
         </div>
     </section>
@@ -597,7 +603,9 @@
             </span> | all rights reserved!! </h1>
     </section>
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js" defer data-deferred="1"></script>
+
     <script src="js/script.js" defer data-deferred="1"></script>
+    <script src="js/bookForm.js"></script>
 </body>
 
 </html>
