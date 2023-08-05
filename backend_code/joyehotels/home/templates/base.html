@@ -1,491 +1,353 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% block title %}{% endblock title %}</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      rel="stylesheet"
-    />
-
-    <style>
-      /* grouped css attributes via type */
-      body {
-        font-family: "Lato", Arial, sans-serif;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 1.7;
-        background: #fff;
-        color: #777;
-      }
-
-      /* nav */
-      nav {
-        margin-bottom: 1rem;
-      }
-
-      nav a {
-        color: white;
-        -webkit-transition: 0.5s;
-        -o-transition: 0.5s;
-        transition: 0.5s;
-      }
-
-      nav a:hover,
-      a:active,
-      a:focus {
-        color: red;
-        outline: none;
-        text-decoration: none;
-      }
-
-      /* jumbotron*/
-      .colorful {
-        background: #4b79a1;
-        /* fallback for old browsers */
-        background: -webkit-linear-gradient(to bottom, #283e51, #4b79a1);
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to bottom, #283e51, #4b79a1);
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        border-radius: 0px;
-        padding: 0px 0 1rem 0 !important;
-      }
-
-      .form-card {
-        background: #fff;
-        border-bottom: 7px solid #1e3c72;
-        border-top: 7px solid #1e3c72;
-        color: black;
-        padding: 0 2rem;
-      }
-
-      .form-card h3 {
-        color: #000;
-        padding: 1rem 0 0.1rem 0;
-      }
-
-      /* hotel card */
-      .hotel-card {
-        border: none !important;
-      }
-
-      .hotel-card .card-img-top {
-        border-radius: 0px;
-        height: 230px;
-      }
-
-      .hotel-card .card-body {
-        padding: 0px !important;
-      }
-
-      .hotel-card .card-body h5 {
-        margin: 0.5rem 0;
-      }
-
-      .hotel-card .card-body h5 a {
-        color: #777;
-      }
-
-      .hotel-card .card-body p {
-        font-size: 0.9rem;
-      }
-
-      /* end of hotel cards */
-
-      /* business process section */
-      #process {
-        background: #2980b9;
-        /* fallback for old browsers */
-        background: -webkit-linear-gradient(to bottom, #2c3e50, #2980b9);
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to bottom, #2c3e50, #2980b9);
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        color: #fff;
-      }
-
-      #process h2,
-      h3 {
-        border-bottom: 2px solid #fff;
-        color: #fff;
-        margin: 1rem 0;
-        padding: 0 0 1rem 0;
-      }
-
-      #process h2 {
-        font-size: 3rem;
-        font-weight: 700;
-      }
-
-      #process h3 {
-        font-size: 1.7rem;
-      }
-
-      #process p {
-        color: rgba(255, 255, 255, 0.7);
-      }
-
-      .icon {
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        padding: 33px 29px;
-
-        background: #2980b9;
-        color: #fff;
-      }
-
-      #process .icon {
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms-border-radius: 50%;
-        border-radius: 50%;
-      }
-
-      #process .icon .fa {
-        font-size: 2rem;
-        margin: 11px 2px;
-      }
-
-      #process .process-step {
-        text-align: center;
-      }
-
-      #process .process-step h3 {
-        color: white;
-        margin-top: 2.2rem;
-      }
-
-      #stat-counter {
-        text-align: center;
-      }
-
-      #stat-counter h2 {
-        font-size: 3rem;
-
-        border-bottom: 1px solid #777;
-        margin-bottom: 0.25rem;
-        padding-bottom: 0.25rem;
-      }
-
-      #stat-counter p {
-        padding-top: 1rem;
-      }
-
-      #stat-counter .counter {
-        display: block;
-
-        margin-bottom: 10px;
-
-        color: #2980b9;
-        font-size: 50px;
-        font-weight: 100;
-      }
-
-      #subscribe-panel {
-        background: #1e3c72;
-        /* fallback for old browsers */
-        background: -webkit-linear-gradient(to bottom, #2a5298, #1e3c72);
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to bottom, #2a5298, #1e3c72);
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-        padding: 5rem 1rem;
-      }
-
-      #subscribe-panel h2 {
-        position: relative;
-
-        margin-bottom: 10px;
-
-        color: white;
-        line-height: 1.5;
-        font-size: 50px;
-        font-weight: 300;
-      }
-
-      #subscribe-panel.form-control {
-        width: 100%;
-
-        border: 2px solid rgba(255, 255, 255, 0.2) !important;
-        -webkit-transition: 0.5s;
-        -o-transition: 0.5s;
-        transition: 0.5s;
-
-        background: #fff;
-        color: #fff;
-        font-size: 16px !important;
-      }
-
-      #subscribe-panel.form-control:focus {
-        background: transparent;
-        border: 2px solid rgba(255, 255, 255, 0.8) !important;
-      }
-
-      #subscribe-panel.form-control::-webkit-input-placeholder,
-      #subscribe-panel.form-control:-moz-placeholder,
-      #subscribe-panel.form-control::-moz-placeholder,
-      #subscribe-panel.form-control:-ms-input-placeholder {
-        color: #fff;
-      }
-
-      #subscribe-panel.btn {
-        height: 46px;
-        border: none !important;
-        padding-left: 50px;
-        padding-right: 50px;
-
-        background: #09c6ab;
-
-        color: #fff;
-        font-size: 16px;
-        text-transform: uppercase;
-        font-weight: 400;
-      }
-
-      #subscribe-panel.form-inline .form-group {
-        width: 100% !important;
-        margin-bottom: 10px;
-      }
-
-      #subscribe-panel.form-inline .form-group .form-control {
-        width: 100%;
-      }
-
-      #subscribe-panel.gtco-heading {
-        margin-bottom: 30px;
-      }
-
-      #subscribe-panel.gtco-heading h2 {
-        color: #fff;
-      }
-
-      #subscribe-panel.gtco-heading p {
-        color: rgba(255, 255, 255, 0.5);
-      }
-
-      .copyright {
-        background: #005c97;
-        /* fallback for old browsers */
-        background: -webkit-linear-gradient(to bottom, #363795, #005c97);
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to bottom, #363795, #005c97);
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      }
-
-      .copyright h3 {
-        color: #fff;
-        font-size: 2.5rem;
-      }
-
-      .copyright p {
-        color: #fff;
-      }
-
-      .footer-nav a {
-        color: #777;
-      }
-
-      /* destination page */
-      .destination-container {
-        height: 70vh;
-        padding: 7rem;
-      }
-
-      .hotels-form {
-        background: #283e51;
-        /* fallback for old browsers */
-        padding: 1rem;
-      }
-
-      .hotels-container {
-        padding: 0.5rem 0 7rem 0;
-      }
-
-      .search-container {
-        background: #d3d3d3;
-      }
-
-      .search-card-result {
-        box-shadow: 0px 1px 4px rgba(41, 51, 57, 0.5);
-        margin: 1rem 0;
-        padding: 0.5rem 0;
-        background-color: #fff;
-      }
-
-      .search-card-result img {
-        height: 190px;
-      }
-
-      .search-card-result h5 {
-        font-style: 1.1rem;
-        font-weight: 700;
-      }
-
-      .search-card-result p {
-        font-size: 0.9rem;
-      }
-
-      .search-card-result .more-offers p {
-        margin-bottom: 0.3rem;
-      }
-
-      .more-offers .additional {
-        padding-top: 0.2rem;
-        font-weight: 700;
-      }
-
-      .fa.checked {
-        color: orange;
-      }
-
-      .map-container-btn {
-        height: 100px;
-
-        box-shadow: 0px 1px 4px rgba(41, 51, 57, 0.5);
-        background-color: wheat;
-      }
-
-      .map-container-btn .btn {
-        margin-top: 30px;
-      }
-
-      .filter-card {
-        padding: 0;
-        background: #fff;
-        color: black;
-      }
-
-      .filter-card h5 {
-        margin: 10px 0;
-        padding: 1rem;
-
-        box-shadow: 0px 1px 4px rgba(41, 51, 57, 0.5);
-        color: #000;
-      }
-
-      .filter-card form {
-        box-shadow: 0px 1px 4px rgba(41, 51, 57, 0.5);
-        padding: 0.5rem 2rem;
-      }
-
-      .map-btn {
-        background-color: #fff !important;
-      }
-
-      /* SOCIAL ICONS.CSS */
-
-      .nav .fa {
-        margin: 5px 2px;
-        padding: 20px;
-
-        font-size: 30px;
-        text-align: center;
-        text-decoration: none;
-      }
-
-      .fa:hover {
-        opacity: 0.7;
-      }
-
-      .fa-facebook {
-        background: #3b5998;
-        color: white;
-      }
-
-      .fa-twitter {
-        background: #55acee;
-        color: white;
-      }
-
-      .fa-google {
-        background: #dd4b39;
-        color: white;
-      }
-
-      .fa-linkedin {
-        background: #007bb5;
-        color: white;
-      }
-
-      .fa-youtube {
-        background: #bb0000;
-        color: white;
-      }
-
-      .fa-instagram {
-        background: #da4453;
-        /* fallback for old browsers */
-        background: -webkit-linear-gradient(to bottom, #89216b, #da4453);
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to bottom, #89216b, #da4453);
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        color: white;
-      }
-
-      .fa-pinterest {
-        background: #cb2027;
-        color: white;
-      }
-
-      .fa-snapchat-ghost {
-        background: #fffc00;
-        color: white;
-        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-      }
-
-      .slidecontainer {
-        width: 100%;
-      }
-
-      .slider {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 100%;
-        height: 25px;
-
-        background: #d3d3d3;
-        outline: none;
-        opacity: 0.7;
-        -webkit-transition: 0.2s;
-        transition: opacity 0.2s;
-      }
-
-      .slider:hover {
-        opacity: 1;
-      }
-
-      .slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 25px;
-        height: 25px;
-
-        background: #1e3c72;
-        cursor: pointer;
-      }
-
-      .slider::-moz-range-thumb {
-        width: 25px;
-        height: 25px;
-
-        background: #1e3c72;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-
-  <body>
-    {% block body %}{% endblock body %}
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JoyeHotels </title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+   <!-- Load your custom CSS file using the static template tag -->
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <header>
+
+        <div id="menu-bar" class="fas fa-bars"></div>
+
+        <div class="wraped_logo">
+
+            <a href="" class="logo">
+                <img src="{% static 'img/logo.png' %}" alt="logo_image" />
+                <span>joye</span>Hotels
+            </a>
+
+        </div>
+
+        <nav class="navbar">
+            <a href="">home</a>
+            <a href="/hotels">hotels</a>
+            <a href="/booking">booking</a>
+            <a href="#services">services</a>
+            <a href="#gallery">gallery</a>
+            <a href="#review">review</a>
+            <a href="/contact">contact</a>
+        </nav>
+
+        <div class="icons">
+            <i class="fas fa-search" id="search-btn"></i>
+            <i class="fas fa-user" id="login-btn"></i>
+        </div>
+
+        <form action="" class="search-bar-container">
+            <input type="search" id="search-bar" placeholder="search here...">
+            <label for="search-bar" class="fas fa-search"></label>
+        </form>
+    </header>
+
+
+
+    <!-- Login page design -->
+    <div class="login-form-container">
+        <i class="fas fa-times" id="form-close"></i>
+        <form action="">
+            <h3>login</h3>
+            <input type="email" class="box" placeholder="enter your email">
+            <input type="password" class="box" placeholder="enter your email">
+            <input type="submit" value="login now" class="btn">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+            <p>forgrt password? <a href="#">click here</a></p>
+            <p>don't have and account? <a href="#">register now</a></p>
+        </form>
+    </div>
+
+
+    <!-- video carousel -->
+
+    <section class="home" id="home">
+        <div class="content">
+            <h3>welcome to A global icon of luxury</h3>
+            <p>dicover new places with us, luxury awaits</p>
+            <a href="#packages" class="btn">discover more</a>
+        </div>
+
+        <div class="controls">
+            <span class="vid-btn active" data-src="{% static 'img/video/vid-1.mp4' %}"></span>
+            <span class="vid-btn" data-src="{% static 'img/video/vid-2.mp4' %}"></span>
+            <span class="vid-btn" data-src="{% static 'img/video/vid-3.mp4' %}"></span>
+          
+        </div>
+
+        <div class="video-container">
+            <video src="img/video/vid-1.mp4" id="video-slider" loop autoplay muted></video>
+        </div>
+
+    </section>
+
+
+    {% block hotels %}
+    
+    {% endblock hotels %}
+
+
+
+    <section class="services" id="services">
+        <h1 class="heading">
+            <span>s</span>
+            <span>e</span>
+            <span>r</span>
+            <span>v</span>
+            <span>i</span>
+            <span>c</span>
+            <span>e</span>
+            <span>s</span>
+        </h1>
+
+        <div class="box-container">
+            <div class="box">
+                <i class="fas fa-hotel"></i>
+                <h3>affordable hotels</h3>
+                <p>joye hotels offer budget-friendly accommodation without compromising on comfort. They cater to
+                    travelers seeking cost-effective options while providing a pleasant stay experience.</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-utensils"></i>
+                <h3>food and drinks</h3>
+                <p>Where Gastronomy Takes Center Stage - Savor Global Flavors and Handcrafted Drinks at Our Hotel. A
+                    Culinary Adventure Awaits, Redefining Your Dining Experience Beyond Expectations!</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-bullhorn"></i>
+                <h3>safty guide</h3>
+                <p>Your Safety Our Priority: Enjoy 24/7 CCTV Surveillance for a Secure Stay. Reach Us Anytime for
+                    Customer Support - We're Just a Call Away, Ready to Assist Both Virtually and In-Person.</p>
+            </div>
+
+
+        </div>
+    </section>
+
+
+
+
+
+
+    <section class="gallery" id="gallery">
+        <h1 class="heading">
+            <span>g</span>
+            <span>a</span>
+            <span>l</span>
+            <span>l</span>
+            <span>e</span>
+            <span>r</span>
+            <span>y</span>
+        </h1>
+
+
+        <div class="box-container">
+            <div class="box">
+                <img decoding="async" src="{% static 'img/g-1.jpg' %}" alt="">
+                <div class="content">
+                    <h3>Gurgaon</h3>
+                    <p>Explore our best services in this location</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+            <div class="box">
+                <img decoding="async" src="{% static 'img/g-2.jpg' %}" alt="">
+                <div class="content">
+                    <h3>Noida</h3>
+                    <p>Explore our best services in this location</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+            <div class="box">
+                <img decoding="async" src="{% static 'img/g-3.jpg' %}" alt="">
+                <div class="content">
+                    <h3>New Delhi</h3>
+                    <p>Explore our best services in this location</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+
+
+
+    <section class="review" id="review">
+        <h1 class="heading">
+            <span>r</span>
+            <span>e</span>
+            <span>v</span>
+            <span>i</span>
+            <span>e</span>
+            <span>w</span>
+        </h1>
+        <div class="swiper mySwiper review-slider">
+            <div class="swiper-wrapper wrapper">
+                <div class="swiper-slide">
+                    <div class="box">
+                        <img decoding="async" src="{% static 'img/pic1.png' %}" alt="">
+                        <h3>Lalisa Benton</h3>
+                        <p>Amazing stay! Exceeded expectations, affordable prices, exceptional customer support. Highly
+                            recommend for a hassle-free travel experience. Will return!</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="box">
+                        <img decoding="async" src="{% static 'img/pic2.png' %} " alt="">
+                        <h3>Edward hemton</h3>
+                        <p>Ample and Convenient Parking! The hotel's well-designed parking facility made my stay
+                            hassle-free. No worries about finding a spot, allowing me to focus on enjoying my trip
+                            fully.</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="box">
+                        <img decoding="async" src="{% static 'img/pic3.png' %}" alt="">
+                        <h3>Jenna solvi</h3>
+                        <p>Smooth and seamless payment process! The hotel's efficient payment system made settling my
+                            bill effortless, enhancing the overall experience of my stay. Impressed with the convenience
+                            and security provided.</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="box">
+                        <img decoding="async" src="{% static 'img/pic4.png' %}" alt="">
+                        <h3>Edward Bey</h3>
+                        <p>Booking directly with the hotel is a smart move! Even if the prices match OTAs, the benefits
+                            can be incredible - think room upgrades, flexible cancellations, and more. Don't miss out!
+                        </p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- contact section -->
+
+    {% block contact %}{% endblock contact %}
+
+    <!-- contact section -->
+
+
+    <section class="brand-container">
+        <div class="swiper mySwiper brand-slider">
+            <div class="swiper-wrapper wrapper">
+                <div class="swiper-slide"><img decoding="async" src="{% static 'img/1.jpg' %}" alt=""></div>
+                <div class="swiper-slide"><img decoding="async" src="{% static 'img/2.jpg' %}" alt=""></div>
+                <div class="swiper-slide"><img decoding="async" src="{% static 'img/3.jpg' %}" alt=""></div>
+                <div class="swiper-slide"><img decoding="async" src="{% static 'img/4.jpg' %}" alt=""></div>
+                <div class="swiper-slide"><img decoding="async" src="{% static 'img/5.jpg' %}" alt=""></div>
+                <div class="swiper-slide"><img decoding="async" src="{% static 'img/6.jpg' %}" alt=""></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Booking section -->
+
+    {% block booking %}{% endblock booking %}
+
+    <!-- Booking section -->
+
+
+
+
+    <section class="footer">
+        <div class="box-container mx-5">
+            <div class="box">
+                <h3>about us</h3>
+                <p>our online hotel booking platform! Discover a seamless experience with all the essentials:
+                    easy room reservations, user-friendly interface, and a wide selection of accommodations. Your ideal
+                    stay is just a few clicks away!</p>
+            </div>
+            <!-- <div class="box">
+                <h3>branch locations</h3>
+                <a href="#">USA</a>
+                <a href="#">india</a>
+                <a href="#">japan</a>
+                <a href="#">philippines</a>
+                <a href="#">france</a>
+            </div> -->
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#">home</a>
+                <a href="#">packages</a>
+                <a href="#">book</a>
+                <a href="#">service</a>
+                <a href="#">gallery</a>
+                <a href="#">review</a>
+                <a href="#">contact</a>
+
+            </div>
+            <div class="box">
+                <h3>follow us</h3>
+                <a href="#">facebook</a>
+                <a href="https://www.instagram.com/joyehotels/">instagram</a>
+                <a href="#">twitter</a>
+                <a href="#">likedin</a>
+            </div>
+        </div>
+        <h1 class="credit"> created by <span>
+                <a href="https://www.instagram.com/coder_vivek/" target="_blank" rel="noopener noreferrer">coder_vivek
+                </a>
+            </span> | all rights reserved!! </h1>
+    </section>
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js" defer></script>
+
+    <!-- Load your custom JavaScript files using the static template tag -->
+    <script src="{% static 'js/script.js' %}" defer></script>
+    <script src="{% static 'js/bookForm.js' %}" defer></script>
+    <script src="{% static 'js/contact.js' %}" defer></script>
+</body>
+
 </html>

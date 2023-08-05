@@ -52,5 +52,9 @@ def register_page(request):
 
     return render(request, 'register.html')
 
+def hotels(request):
+     return render(request, 'hotels.html')
 
+def contact(request):
+     return render(request, 'contact.html')
 
