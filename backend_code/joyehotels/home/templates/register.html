@@ -1,61 +1,29 @@
-{% extends 'base.html' %} {% block title %}JoyeHotels - Register{% endblock title%}
-{% block body %}
+{% extends 'base.html' %}
 
-<div class="container my-3">
+<!-- Add this at the end of the body tag -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> <!-- Include Swiper JS -->
+<script src="path/to/your/script.js"></script> <!-- Include your custom script -->
+
+
+{% load static %}
+<div class="login-form-container">
+    <i class="fas fa-times" id="form-close"></i>
     <form method="POST">
-
         {% csrf_token %}
         {% include 'messages.html' %}
-        <h1>Register user</h1>
-
-
-
-        <!-- Email input -->
-        <div class="form-outline mb-4">
-            <input type="text" name="username" required id="form2Example1" class="form-control" />
-            <label class="form-label" for="form2Example1">username</label>
+        <h3>Register</h3>
+        <input type="text" class="box" placeholder="Enter your name">
+        <input type="email" class="box" placeholder="Enter your email">
+        <input type="password" class="box" placeholder="Enter your password">
+        <input type="submit" value="Register now" class="btn btn-primary">
+        <input type="checkbox" id="agree">
+        <label for="agree">I agree to the terms and conditions</label>
+        <p>Already have an account? <a href="#">Login now</a></p>
+        <p>Or register with:</p>
+        <div class="d-flex justify-content-center">
+            <a href="#" class="btn btn-primary mr-2"><i class="fab fa-google"></i> Login with Google</a>
+            <a href="#" class="btn btn-primary"><i class="fab fa-facebook"></i> Login with Facebook</a>
         </div>
-
-        <!-- Password input -->
-        <div class="form-outline mb-4">
-            <input type="password" name="password" id="form2Example2" class="form-control" />
-            <label class="form-label" for="form2Example2">Password</label>
-        </div>
-
-        <!-- 2 column grid layout for inline styling -->
-        <div class="row mb-4">
-            <div class="col">
-                <!-- Simple link -->
-                <a href="#!">Forgot password?</a>
-            </div>
-        </div>
-
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary btn-block mb-4">
-            Sign up
-        </button>
-
-        <!-- Register buttons -->
-        <!-- <div class="text-center">
-            <p>Not a member? <a href="/register">Register</a></p>
-            <p>or sign up with:</p>
-            <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-facebook-f"></i>
-            </button>
-
-            <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-google"></i>
-            </button>
-
-            <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-twitter"></i>
-            </button>
-
-            <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-github"></i>
-            </button>
-        </div> -->
     </form>
 </div>
 
-{% endblock body %}

@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
-   <!-- Load your custom CSS file using the static template tag -->
-   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Load your custom CSS file using the static template tag -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login_signup.css' %}">
 </head>
 
 <body>
@@ -56,21 +57,21 @@
     </header>
 
 
-
     <!-- Login page design -->
     <div class="login-form-container">
         <i class="fas fa-times" id="form-close"></i>
         <form action="">
             <h3>login</h3>
-            <input type="email" class="box" placeholder="enter your email">
-            <input type="password" class="box" placeholder="enter your email">
+            <input type="text" class="box" placeholder="username">
+            <input type="password" class="box" placeholder="password">
             <input type="submit" value="login now" class="btn">
             <input type="checkbox" id="remember">
             <label for="remember">Remember me</label>
             <p>forgrt password? <a href="#">click here</a></p>
-            <p>don't have and account? <a href="#">register now</a></p>
+            <p>don't have and account? <a href="/register">register now</a></p>
         </form>
     </div>
+    
 
 
     <!-- video carousel -->
@@ -86,7 +87,7 @@
             <span class="vid-btn active" data-src="{% static 'img/video/vid-1.mp4' %}"></span>
             <span class="vid-btn" data-src="{% static 'img/video/vid-2.mp4' %}"></span>
             <span class="vid-btn" data-src="{% static 'img/video/vid-3.mp4' %}"></span>
-          
+
         </div>
 
         <div class="video-container">
@@ -96,9 +97,84 @@
     </section>
 
 
-    {% block hotels %}
-    
-    {% endblock hotels %}
+    <!-- hotels section -->
+
+    <section class="packages" id="packages">
+        <h1 class="heading">
+            <span>h</span>
+            <span>o</span>
+            <span>t</span>
+            <span>e</span>
+            <span>l</span>
+            <span>s</span>
+
+        </h1>
+
+        <div class="box-container">
+            <div class="box">
+                <img decoding="async" src="{% static 'img/p-1.jpg' %}" alt="">
+                <div class="content">
+                    <h3> Mohen peda</h3>
+                    <h4><i class="fas fa-map-marker-alt"></i> Andhra Pradesh </h4>
+                    <p>This majestic 5-star resort sits at a stunning elevation of 2000 feet above the city, in a
+                        restored 1894 palace. The suites have Colonial themed interiors and marble floors with furnished
+                        balconies.</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="price"> ₹ 4399.00 <span>₹ 5000.00</span></div>
+                    <a href="#book" class="btn">book now</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img decoding="async" src="{% static 'img/p-2.jpg' %}" alt="">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i> The Oberoi Amarvilas, Agra </h3>
+                    <p>Built with splendid Mughal architecture, the Oberoi Amarvilas is the best heritage hotel of Agra
+                        by some distance. Dotted with fountains and lawns all around, it offers an unforgettable stay in
+                        a palam</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="price"> ₹ 3799.00 <span>₹ 4000.00</span></div>
+                    <a href="#book" class="btn">book now</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img decoding="async" src="{% static 'img/p-3.jpg' %}" alt="">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i> The Oberoi Udaivilas, Udaypur </h3>
+                    <p>Sprawled across 50 acres of ravishing landscape, this 5-star resort offers panoramic views of
+                        Lake Pichola. Their suites feature grand Rajasthani architecture and stylish interiors with iPod
+                        docks. </p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="price"> ₹ 6799.00 <span>₹ 7000.00</span></div>
+                    <a href="#book" class="btn">book now</a>
+                </div>
+            </div>
+        </div>
+
+        <a href="/hotels">
+            <h3>see more...</h3>
+        </a>
+
+    </section>
 
 
 
@@ -180,7 +256,7 @@
                     <a href="#" class="btn">see more</a>
                 </div>
             </div>
-            
+
         </div>
     </section>
 
@@ -273,9 +349,37 @@
 
     <!-- contact section -->
 
-    {% block contact %}{% endblock contact %}
+    <section class="contact" id="contact">
+        <h1 class="heading">
+            <span>c</span>
+            <span>o</span>
+            <span>n</span>
+            <span>t</span>
+            <span>a</span>
+            <span>c</span>
+            <span>t</span>
+        </h1>
+        <div class="row">
+            <div class="img">
+                <img decoding="async" src="{% static 'img/contact-img.svg' %} " alt="">
+            </div>
+            <form>
+                <div class="inputBox">
+                    <input type="text" placeholder="name" name="name" id="name">
+                    <input type="email" placeholder="email" name="email" id="email">
+                </div>
+                <div class="inputBox">
+                    <input type="number" placeholder="number" name="number" id="number">
+                    <input type="text" placeholder="subject" name="subject" id="subject">
+                </div>
+                <textarea placeholder="message" name="message" id="message" cols="46" rows="10"></textarea>
+                <input type="submit" onClick="sendWhatsapp()" class="btn" value="send message">
+            </form>
 
-    <!-- contact section -->
+        </div>
+    </section>
+
+    <!-- brands section -->
 
 
     <section class="brand-container">
@@ -290,13 +394,6 @@
             </div>
         </div>
     </section>
-
-
-    <!-- Booking section -->
-
-    {% block booking %}{% endblock booking %}
-
-    <!-- Booking section -->
 
 
 
@@ -348,6 +445,7 @@
     <script src="{% static 'js/script.js' %}" defer></script>
     <script src="{% static 'js/bookForm.js' %}" defer></script>
     <script src="{% static 'js/contact.js' %}" defer></script>
+    <script src="{% static 'js/login_signup.js' %}" defer></script>
 </body>
 
 </html>

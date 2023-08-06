@@ -353,6 +353,14 @@ header .search-bar-container label:hover {
   gap: 2rem;
 }
 
+.packages a h3{
+  text-align: right;
+  margin-top: 20px;
+  font-size: 22px;
+  text-decoration: underline;
+
+}
+
 .packages .box-container .box {
   flex: 1 1 30rem;
   border-radius: 0.5rem;

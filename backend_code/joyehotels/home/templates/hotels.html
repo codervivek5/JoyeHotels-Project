@@ -1,8 +1,80 @@
-{% extends 'base.html' %}
-
 {% load static %}
 
-{% block hotels %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JoyeHotels </title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <!-- Load your custom CSS file using the static template tag -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login_signup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hotels.css' %}">
+</head>
+
+<body>
+
+    <header>
+
+        <div id="menu-bar" class="fas fa-bars"></div>
+
+        <div class="wraped_logo">
+
+            <a href="" class="logo">
+                <img src="{% static 'img/logo.png' %}" alt="logo_image" />
+                <span>joye</span>Hotels
+            </a>
+
+        </div>
+
+        <nav class="navbar">
+            <a href="">home</a>
+            <a href="/hotels">hotels</a>
+            <a href="/booking">booking</a>
+            <a href="#services">services</a>
+            <a href="#gallery">gallery</a>
+            <a href="#review">review</a>
+            <a href="/contact">contact</a>
+        </nav>
+
+        <div class="icons">
+            <i class="fas fa-search" id="search-btn"></i>
+            <i class="fas fa-user" id="login-btn"></i>
+        </div>
+
+        <form action="" class="search-bar-container">
+            <input type="search" id="search-bar" placeholder="search here...">
+            <label for="search-bar" class="fas fa-search"></label>
+        </form>
+    </header>
+
+
+     <!-- Login page design -->
+     <div class="login-form-container">
+        <i class="fas fa-times" id="form-close"></i>
+        <form action="">
+            <h3>login</h3>
+            <input type="text" class="box" placeholder="username">
+            <input type="password" class="box" placeholder="password">
+            <input type="submit" value="login now" class="btn">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+            <p>forgrt password? <a href="#">click here</a></p>
+            <p>don't have and account? <a href="/register">register now</a></p>
+        </form>
+    </div>
+    
+
+   
 
     <!-- hotels section -->
 
@@ -21,7 +93,7 @@
             <div class="box">
                 <img decoding="async" src="{% static 'img/p-1.jpg' %}" alt="">
                 <div class="content">
-                    <h3> Taj Falaknuma Palace </h3>
+                    <h3> Mohen peda</h3>
                     <h4><i class="fas fa-map-marker-alt"></i> Andhra Pradesh </h4>
                     <p>This majestic 5-star resort sits at a stunning elevation of 2000 feet above the city, in a
                         restored 1894 palace. The suites have Colonial themed interiors and marble floors with furnished
@@ -75,11 +147,62 @@
                     <a href="#book" class="btn">book now</a>
                 </div>
             </div>
-
-            
         </div>
+
+
     </section>
 
-    
 
-    {% endblock hotels %}
+    <!-- footer section-->
+
+    <section class="footer">
+        <div class="box-container mx-5">
+            <div class="box">
+                <h3>about us</h3>
+                <p>our online hotel booking platform! Discover a seamless experience with all the essentials:
+                    easy room reservations, user-friendly interface, and a wide selection of accommodations. Your ideal
+                    stay is just a few clicks away!</p>
+            </div>
+            <!-- <div class="box">
+                <h3>branch locations</h3>
+                <a href="#">USA</a>
+                <a href="#">india</a>
+                <a href="#">japan</a>
+                <a href="#">philippines</a>
+                <a href="#">france</a>
+            </div> -->
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#">home</a>
+                <a href="#">packages</a>
+                <a href="#">book</a>
+                <a href="#">service</a>
+                <a href="#">gallery</a>
+                <a href="#">review</a>
+                <a href="#">contact</a>
+
+            </div>
+            <div class="box">
+                <h3>follow us</h3>
+                <a href="#">facebook</a>
+                <a href="https://www.instagram.com/joyehotels/">instagram</a>
+                <a href="#">twitter</a>
+                <a href="#">likedin</a>
+            </div>
+        </div>
+        <h1 class="credit"> created by <span>
+                <a href="https://www.instagram.com/coder_vivek/" target="_blank" rel="noopener noreferrer">coder_vivek
+                </a>
+            </span> | all rights reserved!! </h1>
+    </section>
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js" defer></script>
+
+    <!-- Load your custom JavaScript files using the static template tag -->
+    <script src="{% static 'js/script.js' %}" defer></script>
+    <script src="{% static 'js/bookForm.js' %}" defer></script>
+    <script src="{% static 'js/contact.js' %}" defer></script>
+    <script src="{% static 'js/login_signup.js' %}" defer></script>
+</body>
+
+</html>
