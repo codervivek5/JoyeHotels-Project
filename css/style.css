@@ -678,3 +678,7 @@ header .search-bar-container label:hover {
     width: 100%;
   }
 }
+
+#signup_form{
+  display: none;
+}
