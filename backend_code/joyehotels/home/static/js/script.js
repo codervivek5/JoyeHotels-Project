@@ -6,6 +6,21 @@ let formClose = document.querySelector('#form-close');
 let menu = document.querySelector('#menu-bar');
 let navbar = document.querySelector('.navbar');
 let videoBtn = document.querySelectorAll('.vid-btn');
+const signup_form = document.getElementById("signup_form");
+const login_form = document.getElementById("login_form");
+const signin_toggle = document.getElementById("signin_toggle");
+const signup_toggle = document.getElementById("signup_toggle");
+
+signin_toggle.addEventListener("click" , () => {
+    login_form.style.display="none"
+    signup_form.style.display="block"
+})
+
+signup_toggle.addEventListener("click" , () => {
+    signup_form.style.display="none"
+    login_form.style.display="block"
+})
+
 
 
 window.onscroll = () =>{
