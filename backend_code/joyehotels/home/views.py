@@ -1,60 +1,69 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate, login
-
-# Create your views here.
+from django.contrib.auth import authenticate, login, logout
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'user_authenticated': request.user.is_authenticated, 'user': request.user})
 
-def login_page(request):
 
+
+def login_view(request):
     if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+        username = request.POST['username']
+        password = request.POST['password']
 
-            user_obj = User.objects.filter(username=username)
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, 'login.html', {'error_message': messages.get_messages(request)})
 
-            if not user_obj.exists():
-                # messages.add_message(request, messages.INFO, "Change Username")
-                messages.warning(request, "Account not found")
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+# def login_view(request):    
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+        
+#         user = authenticate(username=username, password=password)
+        
+#         if user is not None:
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             messages.warning(request, "Invalid username or password!")
+        
+#     return redirect('home')
 
-            user_obj = authenticate(username = username , password = password)
-            if not user_obj:
-                messages.warning(request, "invalid password!")
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-            login(request, user_obj)
-            return redirect('/')
-           
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    return render(request, 'login.html')
-
-def register_page(request):
+def register_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        password = request.POST.get('password')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+
+        # print(username,email,password1,password2)
+
+        if password1 != password2:
+            messages.warning(request, "Passwords do not match!")
+            return redirect('home')
 
         user_obj = User.objects.filter(username=username)
 
         if user_obj.exists():
-            # messages.add_message(request, messages.INFO, "Change Username")
-            messages.warning(request, "Username already exits!")
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            messages.warning(request, "Username already exists!")
+            return redirect('/register')
 
-        user = User.objects.create(username=username)
-        user.set_password(password)
+        user = User.objects.create_user(username=username, email=email, password=password1)
         user.save()
-        return redirect('/')
+        return redirect('home')
 
-    return render(request, 'register.html')
+    return redirect('home')
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 def hotels(request):
-     return render(request, 'hotels.html')
-
-# def contact(request):
-#      return render(request, 'contact.html')
-
+    return render(request, 'hotels.html')

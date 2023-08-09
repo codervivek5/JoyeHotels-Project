@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% extends 'hotels.html' %}
+
+
 {% load static %}
 
 {% block booking %}
@@ -17,9 +20,9 @@
     </h1>
 
     <div class="row">
-        <div class="img">
+        <!-- <div class="img">
             <img decoding="async" src=" {% static 'img/book-img.svg' %} " alt="">
-        </div>
+        </div> -->
 
         <form onsubmit="return validate()" action="https://formsubmit.co/codervivek5@gmail.com" method="POST">
             <div class="inputBox">
@@ -46,6 +49,8 @@
             </div>
             <input type="submit" onClick="sendWA()" class="btn" value="book now">
         </form>
+
+
     </div>
 </section>
 {% endblock booking %}
