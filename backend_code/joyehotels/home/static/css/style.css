@@ -325,10 +325,10 @@ header .search-bar-container label:hover {
 .home .controls .vid-btn.active {
   background: var(--orange);
 }
-
+/* 
 .book{
   margin-top: 10rem;
-}
+} */
 
 
 .book .row {
@@ -337,7 +337,7 @@ header .search-bar-container label:hover {
   flex-wrap: wrap;
   gap: 1.5rem;
   align-items: center;
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
 }
 
 .book .row .img img {

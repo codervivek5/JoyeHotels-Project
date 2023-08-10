@@ -23,3 +23,8 @@ urlpatterns = [
      path('', include('home.urls')),
     
 ]
+
+# costume admin pannel property
+admin.site.site_header = "JoyeHotels Admin"
+admin.site.site_title = "JoyeHotels Admin Portal"
+admin.site.index_title = "Welcome to JoyeHotels"

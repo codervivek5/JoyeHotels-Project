@@ -14,8 +14,12 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        print("Username:", username)
+        print("Password:", password)
         
         user = authenticate(request, username=username, password=password)
+
+        print("User:", user)
         if user is not None:
             login(request, user)
             return redirect('home')
@@ -26,6 +30,7 @@ def login_view(request):
 
 # @login_required(login_url='home')  # Redirects authenticated users to the 'home' page
 def register_view(request):
+    
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -48,7 +53,7 @@ def register_view(request):
 
         user = User.objects.create_user(username=username, email=email, password=password1)
         user.save()
-        return redirect('home')  # Redirect to the home page after successful registration
+        return redirect('/login')  # Redirect to the login page after successful registration
 
     return render(request, 'register.html')  # Show the registration form for non-authenticated users
 
