@@ -325,8 +325,9 @@ header .search-bar-container label:hover {
 .home .controls .vid-btn.active {
   background: var(--orange);
 }
+
 .book{
-  margin-top: 50px;
+  margin-top: 10rem;
 }
 
 
@@ -377,11 +378,17 @@ header .search-bar-container label:hover {
 }
 
 .packages a h3{
-  text-align: right;
+  display: inline;
+  float: right;
+  /* text-align: right; */
   margin-top: 20px;
   font-size: 22px;
+  color: darkblue;
   text-decoration: underline;
 
+}
+.packages a h3:hover{
+  color: var(--orange);
 }
 
 .packages .box-container .box {
@@ -696,6 +703,13 @@ header .search-bar-container label:hover {
     margin: 1.5rem 0;
     background: #222;
   }
+  
+  .book{
+    margin-top: 10rem;
+  }
+  .book .row .img img{
+    display: none;
+  }
 }
 
 @media (max-width: 450px) {
@@ -708,6 +722,18 @@ header .search-bar-container label:hover {
   .contact .row form .inputBox input {
     width: 100%;
   }
+ 
+}
+@media (max-width: 395px) {
+  header .icons p {
+    font-size: small;
+    margin-right: 10px;
+  }
+  header .icons a {
+    font-size: small;
+    margin-right: 20px;
+  }
+  
 }
 
 /* For register page */

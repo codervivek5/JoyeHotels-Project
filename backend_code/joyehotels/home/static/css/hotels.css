@@ -1,0 +1,9 @@
+@media (max-width: 800px) {
+    .book .row .img img{
+        display: none;
+    }
+  }
+
+  .book{
+    margin-top: 10rem;
+  } 

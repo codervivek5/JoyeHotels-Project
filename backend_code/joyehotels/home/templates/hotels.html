@@ -20,11 +20,11 @@
 
     <!-- Load your custom CSS file using the static template tag -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/login_signup.css' %}" />
     <link rel="stylesheet" href="{% static 'css/hotels.css' %}" />
   </head>
 
   <body>
+
     <header>
       <div id="menu-bar" class="fas fa-bars"></div>
 
@@ -35,10 +35,9 @@
         </a>
       </div>
 
-      <nav class="navbar">
-        <a href="/">home</a>
-        <a href="/hotels">hotels</a>
-        <!-- <a href="/booking">booking</a> -->
+      <nav class="navbar" id="navbar">
+        <a href="">home</a>
+        <a href="{% url 'hotels' %}">hotels</a>
         <a href="/#services">services</a>
         <a href="/#gallery">gallery</a>
         <a href="/#review">review</a>
@@ -47,7 +46,16 @@
 
       <div class="icons">
         <i class="fas fa-search" id="search-btn"></i>
-        <a href="#" class="btn btn-outline-success">Login</a>
+
+        {% if user_authenticated %}
+        <p>Hello, {{ user.username }}!</p>
+        <a href="{% url 'logout' %}">Logout</a>
+
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a>
+        {% endif %}
+
+        
       </div>
 
       <form action="" class="search-bar-container">
@@ -56,7 +64,7 @@
       </form>
     </header>
 
-    <section class="book" style="margin-top: 50px" id="book">
+    <section class="book"  id="book">
       <h1 class="heading">
         <span>b</span>
         <span>o</span>
