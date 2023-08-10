@@ -1,284 +1,139 @@
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JoyeHotels</title>
+{% include 'navigation.html' %}
 
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
-    />
+<section class="book" id="book">
+  <h1 class="heading">
+    <span>b</span>
+    <span>o</span>
+    <span>o</span>
+    <span>k</span>
+    <span class="space"></span>
+    <span>n</span>
+    <span>o</span>
+    <span>w</span>
+  </h1>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+  <div class="row">
+    <form
+      method="POST"
+    >
+      <div class="inputBox">
+        <input type="hidden" name="_subject" value="New submission!" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display: none" />
+        <input type="hidden" name="_template" value="table" />
 
-    <!-- Load your custom CSS file using the static template tag -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/hotels.css' %}" />
-  </head>
-
-  <body>
-
-    <header>
-      <div id="menu-bar" class="fas fa-bars"></div>
-
-      <div class="wraped_logo">
-        <a href="" class="logo">
-          <img src="{% static 'img/logo.png' %}" alt="logo_image" />
-          <span>joye</span>Hotels
-        </a>
+        <h3>where to</h3>
+        <input type="text" name="Place" id="place" placeholder="place name" />
       </div>
-
-      <nav class="navbar" id="navbar">
-        <a href="">home</a>
-        <a href="{% url 'hotels' %}">hotels</a>
-        <a href="/#services">services</a>
-        <a href="/#gallery">gallery</a>
-        <a href="/#review">review</a>
-        <a href="/#contact">contact</a>
-      </nav>
-
-      <div class="icons">
-        <i class="fas fa-search" id="search-btn"></i>
-
-        {% if user_authenticated %}
-        <p>Hello, {{ user.username }}!</p>
-        <a href="{% url 'logout' %}">Logout</a>
-
-        {% else %}
-        <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a>
-        {% endif %}
-
-        
+      <div class="inputBox">
+        <h3>how many</h3>
+        <input
+          type="number"
+          name="Number of guests"
+          id="numberOfGuests"
+          placeholder="number of guests"
+        />
       </div>
-
-      <form action="" class="search-bar-container">
-        <input type="search" id="search-bar" placeholder="search here..." />
-        <label for="search-bar" class="fas fa-search"></label>
-      </form>
-    </header>
-
-    <section class="book"  id="book">
-      <h1 class="heading">
-        <span>b</span>
-        <span>o</span>
-        <span>o</span>
-        <span>k</span>
-        <span class="space"></span>
-        <span>n</span>
-        <span>o</span>
-        <span>w</span>
-      </h1>
-
-      <div class="row">
-        <form
-          onsubmit="return validate()"
-          action="https://formsubmit.co/codervivek5@gmail.com"
-          method="POST"
-        >
-          <div class="inputBox">
-            <input type="hidden" name="_subject" value="New submission!" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="text" name="_honey" style="display: none" />
-            <input type="hidden" name="_template" value="table" />
-
-            <h3>where to</h3>
-            <input
-              type="text"
-              name="Place"
-              id="place"
-              placeholder="place name"
-            />
-          </div>
-          <div class="inputBox">
-            <h3>how many</h3>
-            <input
-              type="number"
-              name="Number of guests"
-              id="numberOfGuests"
-              placeholder="number of guests"
-            />
-          </div>
-          <div class="inputBox">
-            <h3>arrivals</h3>
-            <input type="date" name="Check in date" id="checkInDate" />
-          </div>
-          <div class="inputBox">
-            <h3>leaving</h3>
-            <input type="date" name="Check out date" id="checkOutDate" />
-          </div>
-          <input
-            type="submit"
-            onClick="sendWA()"
-            class="btn"
-            value="book now"
-          />
-        </form>
-
-        <div class="img">
-          <img
-            decoding="async"
-            src=" {% static 'img/book-img.svg' %} "
-            alt=""
-          />
-        </div>
+      <div class="inputBox">
+        <h3>arrivals</h3>
+        <input type="date" name="Check in date" id="checkInDate" />
       </div>
-    </section>
-
-    <!-- hotels section -->
-    <section class="packages" id="packages">
-      <h1 class="heading">
-        <span>h</span>
-        <span>o</span>
-        <span>t</span>
-        <span>e</span>
-        <span>l</span>
-        <span>s</span>
-      </h1>
-
-      <div class="box-container">
-        <div class="box">
-          <img decoding="async" src="{% static 'img/p-1.jpg' %}" alt="" />
-          <div class="content">
-            <h3>Mohen peda</h3>
-            <h4><i class="fas fa-map-marker-alt"></i> Andhra Pradesh</h4>
-            <p>
-              This majestic 5-star resort sits at a stunning elevation of 2000
-              feet above the city, in a restored 1894 palace. The suites have
-              Colonial themed interiors and marble floors with furnished
-              balconies.
-            </p>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <div class="price">₹ 4399.00 <span>₹ 5000.00</span></div>
-            <a href="#book" class="btn">book now</a>
-          </div>
-        </div>
-
-        <div class="box">
-          <img decoding="async" src="{% static 'img/p-2.jpg' %}" alt="" />
-          <div class="content">
-            <h3>
-              <i class="fas fa-map-marker-alt"></i> The Oberoi Amarvilas, Agra
-            </h3>
-            <p>
-              Built with splendid Mughal architecture, the Oberoi Amarvilas is
-              the best heritage hotel of Agra by some distance. Dotted with
-              fountains and lawns all around, it offers an unforgettable stay in
-              a palam
-            </p>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <div class="price">₹ 3799.00 <span>₹ 4000.00</span></div>
-            <a href="#book" class="btn">book now</a>
-          </div>
-        </div>
-
-        <div class="box">
-          <img decoding="async" src="{% static 'img/p-3.jpg' %}" alt="" />
-          <div class="content">
-            <h3>
-              <i class="fas fa-map-marker-alt"></i> The Oberoi Udaivilas,
-              Udaypur
-            </h3>
-            <p>
-              Sprawled across 50 acres of ravishing landscape, this 5-star
-              resort offers panoramic views of Lake Pichola. Their suites
-              feature grand Rajasthani architecture and stylish interiors with
-              iPod docks.
-            </p>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <div class="price">₹ 6799.00 <span>₹ 7000.00</span></div>
-            <a href="#book" class="btn">book now</a>
-          </div>
-        </div>
+      <div class="inputBox">
+        <h3>leaving</h3>
+        <input type="date" name="Check out date" id="checkOutDate" />
       </div>
-    </section>
+      <input type="submit" onClick="sendWA()" class="btn" value="book now" />
+    </form>
 
-    <!-- footer section-->
+    <div class="img">
+      <img decoding="async" src=" {% static 'img/book-img.svg' %} " alt="" />
+    </div>
+  </div>
+</section>
 
-    <section class="footer">
-      <div class="box-container mx-5">
-        <div class="box">
-          <h3>about us</h3>
-          <p>
-            our online hotel booking platform! Discover a seamless experience
-            with all the essentials: easy room reservations, user-friendly
-            interface, and a wide selection of accommodations. Your ideal stay
-            is just a few clicks away!
-          </p>
+<!-- hotels section -->
+<section class="packages" id="packages">
+  <h1 class="heading">
+    <span>h</span>
+    <span>o</span>
+    <span>t</span>
+    <span>e</span>
+    <span>l</span>
+    <span>s</span>
+  </h1>
+
+  <div class="box-container">
+    <div class="box">
+      <img decoding="async" src="{% static 'img/p-1.jpg' %}" alt="" />
+      <div class="content">
+        <h3>Mohen peda</h3>
+        <h4><i class="fas fa-map-marker-alt"></i> Andhra Pradesh</h4>
+        <p>
+          This majestic 5-star resort sits at a stunning elevation of 2000 feet
+          above the city, in a restored 1894 palace. The suites have Colonial
+          themed interiors and marble floors with furnished balconies.
+        </p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
         </div>
-        <!-- <div class="box">
-                <h3>branch locations</h3>
-                <a href="#">USA</a>
-                <a href="#">india</a>
-                <a href="#">japan</a>
-                <a href="#">philippines</a>
-                <a href="#">france</a>
-            </div> -->
-        <div class="box">
-          <h3>quick links</h3>
-          <a href="#">home</a>
-          <a href="#">packages</a>
-          <a href="#">book</a>
-          <a href="#">service</a>
-          <a href="#">gallery</a>
-          <a href="#">review</a>
-          <a href="#">contact</a>
-        </div>
-        <div class="box">
-          <h3>follow us</h3>
-          <a href="#">facebook</a>
-          <a href="https://www.instagram.com/joyehotels/">instagram</a>
-          <a href="#">twitter</a>
-          <a href="#">likedin</a>
-        </div>
+        <div class="price">₹ 4399.00 <span>₹ 5000.00</span></div>
+        <a href="#book" class="btn">book now</a>
       </div>
-      <h1 class="credit">
-        created by
-        <span>
-          <a
-            href="https://www.instagram.com/coder_vivek/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >coder_vivek
-          </a>
-        </span>
-        | all rights reserved!!
-      </h1>
-    </section>
+    </div>
 
-    <script
-      src="https://unpkg.com/swiper@7/swiper-bundle.min.js"
-      defer
-    ></script>
+    <div class="box">
+      <img decoding="async" src="{% static 'img/p-2.jpg' %}" alt="" />
+      <div class="content">
+        <h3>
+          <i class="fas fa-map-marker-alt"></i> The Oberoi Amarvilas, Agra
+        </h3>
+        <p>
+          Built with splendid Mughal architecture, the Oberoi Amarvilas is the
+          best heritage hotel of Agra by some distance. Dotted with fountains
+          and lawns all around, it offers an unforgettable stay in a palam
+        </p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="price">₹ 3799.00 <span>₹ 4000.00</span></div>
+        <a href="#book" class="btn">book now</a>
+      </div>
+    </div>
 
-    <!-- Load your custom JavaScript files using the static template tag -->
-    <script src="{% static 'js/script.js' %}" defer></script>
-    <script src="{% static 'js/bookForm.js' %}" defer></script>
-    <script src="{% static 'js/contact.js' %}" defer></script>
-    <script src="{% static 'js/login_signup.js' %}" defer></script>
-  </body>
-</html>
+    <div class="box">
+      <img decoding="async" src="{% static 'img/p-3.jpg' %}" alt="" />
+      <div class="content">
+        <h3>
+          <i class="fas fa-map-marker-alt"></i> The Oberoi Udaivilas, Udaypur
+        </h3>
+        <p>
+          Sprawled across 50 acres of ravishing landscape, this 5-star resort
+          offers panoramic views of Lake Pichola. Their suites feature grand
+          Rajasthani architecture and stylish interiors with iPod docks.
+        </p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="price">₹ 6799.00 <span>₹ 7000.00</span></div>
+        <a href="#book" class="btn">book now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer section-->
+{% include 'footer.html' %}

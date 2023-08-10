@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -25,45 +26,8 @@
 
   <body>
 
-    
-    <header>
-      <div id="menu-bar" class="fas fa-bars"></div>
 
-      <div class="wraped_logo">
-        <a href="" class="logo">
-          <img src="{% static 'img/logo.png' %}" alt="logo_image" />
-          <span>joye</span>Hotels
-        </a>
-      </div>
-
-      <nav class="navbar" id="navbar">
-        <a href="">home</a>
-        <a href="{% url 'hotels' %}">hotels</a>
-        <a href="/#services">services</a>
-        <a href="/#gallery">gallery</a>
-        <a href="/#review">review</a>
-        <a href="/#contact">contact</a>
-      </nav>
-
-      <div class="icons">
-        <i class="fas fa-search" id="search-btn"></i>
-
-        {% if user_authenticated %}
-        <p>Hello, {{ user.username }}!</p>
-        <a href="{% url 'logout' %}">Logout</a>
-
-        {% else %}
-        <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a>
-        {% endif %}
-
-        
-      </div>
-
-      <form action="" class="search-bar-container">
-        <input type="search" id="search-bar" placeholder="search here..." />
-        <label for="search-bar" class="fas fa-search"></label>
-      </form>
-    </header>
+    {% include 'navigation.html' %}
 
     <!-- video carousel -->
 
@@ -416,56 +380,7 @@
       </div>
     </section>
 
-    <section class="footer">
-      <div class="box-container mx-5">
-        <div class="box">
-          <h3>about us</h3>
-          <p>
-            our online hotel booking platform! Discover a seamless experience
-            with all the essentials: easy room reservations, user-friendly
-            interface, and a wide selection of accommodations. Your ideal stay
-            is just a few clicks away!
-          </p>
-        </div>
-        <!-- <div class="box">
-                <h3>branch locations</h3>
-                <a href="#">USA</a>
-                <a href="#">india</a>
-                <a href="#">japan</a>
-                <a href="#">philippines</a>
-                <a href="#">france</a>
-            </div> -->
-        <div class="box">
-          <h3>quick links</h3>
-          <a href="#">home</a>
-          <a href="#">packages</a>
-          <a href="#">book</a>
-          <a href="#">service</a>
-          <a href="#">gallery</a>
-          <a href="#">review</a>
-          <a href="#">contact</a>
-        </div>
-        <div class="box">
-          <h3>follow us</h3>
-          <a href="#">facebook</a>
-          <a href="https://www.instagram.com/joyehotels/">instagram</a>
-          <a href="#">twitter</a>
-          <a href="#">likedin</a>
-        </div>
-      </div>
-      <h1 class="credit">
-        created by
-        <span>
-          <a
-            href="https://www.instagram.com/coder_vivek/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >coder_vivek
-          </a>
-        </span>
-        | all rights reserved!!
-      </h1>
-    </section>
+    {% include 'footer.html' %}
 
     <script
       src="https://unpkg.com/swiper@7/swiper-bundle.min.js"

@@ -58,7 +58,7 @@
       </form>
     </header>
 
-    <!-- login form -->
+    <!-- Register form -->
 
     <section class="book" style="margin-top: 50px" id="book">
       <h1 class="heading">
@@ -83,6 +83,7 @@
 
         <div class="login-form-container form">
           <form action="" method="POST">
+            {% csrf_token %}
             <div class="inputBox">
               <h3>Enter username</h3>
               <input
