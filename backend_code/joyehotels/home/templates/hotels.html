@@ -2,17 +2,8 @@
 
 {% include 'navigation.html' %}
 
-<section class="book" id="book">
-  <h1 class="heading">
-    <span>b</span>
-    <span>o</span>
-    <span>o</span>
-    <span>k</span>
-    <span class="space"></span>
-    <span>n</span>
-    <span>o</span>
-    <span>w</span>
-  </h1>
+
+<!-- <section class="book" style="margin-top: 70px;" id="book">
 
   <div class="row">
     <form
@@ -22,11 +13,11 @@
         <input type="hidden" name="_subject" value="New submission!" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="_honey" style="display: none" />
-        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_template" value="table" /> -->
 
-        <h3>where to</h3>
-        <input type="text" name="Place" id="place" placeholder="place name" />
-      </div>
+        <!-- <h3>where to</h3>
+        <input type="text" name="Place" id="place" placeholder="place name" /> -->
+      <!-- </div>
       <div class="inputBox">
         <h3>how many</h3>
         <input
@@ -51,7 +42,12 @@
       <img decoding="async" src=" {% static 'img/book-img.svg' %} " alt="" />
     </div>
   </div>
-</section>
+</section> -->
+
+<!-- filterSection section-->
+
+{% comment %} {% block filterSection %}{% endblock filterSection %} {% endcomment %}
+{% include 'filterSection.html' %}
 
 <!-- hotels section -->
 <section class="packages" id="packages">

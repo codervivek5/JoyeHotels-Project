@@ -48,11 +48,12 @@ def register_view(request):
         user_obj = User.objects.filter(username=username)
 
         if user_obj.exists():
-            messages.warning(request, "Username already exists!")
+            messages.error(request, "Username already exists!")
             return redirect('/register')  # Redirect back to the registration page with the error message
 
         user = User.objects.create_user(username=username, email=email, password=password1)
         user.save()
+        messages.success(request, "Register successfully!")
         return redirect('/login')  # Redirect to the login page after successful registration
 
     return render(request, 'register.html')  # Show the registration form for non-authenticated users

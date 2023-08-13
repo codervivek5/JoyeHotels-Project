@@ -3,10 +3,11 @@
 {% load static %}
 
 {% block register %}
-    <!-- Register form -->
-    {% include 'messages.html' %}
 
-    <section class="book"  id="book">
+    <!-- Register form -->
+    
+    <section class="book" style="margin-top: 50px"  id="book">
+      {% include 'messages.html' %}
 
       <div class="row">
         <div class="img">
@@ -39,7 +40,7 @@
               <h3>Enter password</h3>
               <input
                 type="password"
-                name="password"
+                name="password1"
                 id="password"
                 placeholder="password"
               />
@@ -48,7 +49,7 @@
               <h3>Confirm password</h3>
               <input
                 type="password"
-                name="password"
+                name="password2"
                 id="password"
                 placeholder="password"
               />
