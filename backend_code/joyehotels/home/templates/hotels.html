@@ -1,57 +1,69 @@
-{% load static %}
+{% load static %} <!-- Load static files -->
 
-{% include 'navigation.html' %}
+{% include 'navigation.html' %} <!-- Include navigation section -->
 
-
-<!-- <section class="book" style="margin-top: 70px;" id="book">
-
+<section class="book" style="margin-top: 70px" id="book">
   <div class="row">
-    <form
-      method="POST"
-    >
+    <form method="POST">
+      {% csrf_token %}
+      <!-- Form for booking -->
+
       <div class="inputBox">
+        <!-- Input box for selecting place -->
         <input type="hidden" name="_subject" value="New submission!" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="_honey" style="display: none" />
-        <input type="hidden" name="_template" value="table" /> -->
+        <input type="hidden" name="_template" value="table" />
 
-        <!-- <h3>where to</h3>
-        <input type="text" name="Place" id="place" placeholder="place name" /> -->
-      <!-- </div>
-      <div class="inputBox">
-        <h3>how many</h3>
-        <input
-          type="number"
-          name="Number of guests"
-          id="numberOfGuests"
-          placeholder="number of guests"
-        />
+        <h3>Place</h3>
+        <!-- <input type="text" name="Place" id="place" placeholder="place name" /> -->
+
+        <select class="dropdown">
+          <!-- Dropdown for selecting place -->
+          <option value="" disabled selected>--choose--</option>
+
+          {% for hotel_objs in hotel_obj %}
+          <!-- Loop through available amenities -->
+          <option value="{{hotel_objs.place}}">
+            {{hotel_objs.place}}
+          </option>
+          {% endfor %}
+        </select>
       </div>
+
+      <!-- <div class="inputBox">
+        <h3>how many</h3>
+        <input type="number" name="Number of guests" id="numberOfGuests" placeholder="number of guests" />
+      </div> -->
+
       <div class="inputBox">
+        <!-- Input box for check-in date -->
         <h3>arrivals</h3>
         <input type="date" name="Check in date" id="checkInDate" />
       </div>
       <div class="inputBox">
+        <!-- Input box for check-out date -->
         <h3>leaving</h3>
         <input type="date" name="Check out date" id="checkOutDate" />
       </div>
-      <input type="submit" onClick="sendWA()" class="btn" value="book now" />
+      <input type="submit" class="btn" value="book now" />
+      <!-- Submit button for booking -->
     </form>
 
     <div class="img">
-      <img decoding="async" src=" {% static 'img/book-img.svg' %} " alt="" />
+      <!-- Image section -->
+      <img decoding="async" src="{% static 'img/book-img.svg' %}" alt="" />
     </div>
   </div>
-</section> -->
+</section>
 
-<!-- filterSection section-->
-
-{% comment %} {% block filterSection %}{% endblock filterSection %} {% endcomment %}
+<!-- Include filterSection section -->
 {% include 'filterSection.html' %}
 
-<!-- hotels section -->
+<!-- Hotels section -->
 <section class="packages" id="packages">
   <h1 class="heading">
+    <!-- Heading for hotels section -->
     <span>h</span>
     <span>o</span>
     <span>t</span>
@@ -60,76 +72,41 @@
     <span>s</span>
   </h1>
 
+  <!-- Hotel cards section -->
   <div class="box-container">
-    <div class="box">
-      <img decoding="async" src="{% static 'img/p-1.jpg' %}" alt="" />
-      <div class="content">
-        <h3>Mohen peda</h3>
-        <h4><i class="fas fa-map-marker-alt"></i> Andhra Pradesh</h4>
-        <p>
-          This majestic 5-star resort sits at a stunning elevation of 2000 feet
-          above the city, in a restored 1894 palace. The suites have Colonial
-          themed interiors and marble floors with furnished balconies.
-        </p>
-        <div class="stars">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-        </div>
-        <div class="price">₹ 4399.00 <span>₹ 5000.00</span></div>
-        <a href="#book" class="btn">book now</a>
-      </div>
-    </div>
+    {% for hotel_obj in hotel_obj %}
+    <!-- Loop through hotel objects -->
 
     <div class="box">
-      <img decoding="async" src="{% static 'img/p-2.jpg' %}" alt="" />
-      <div class="content">
-        <h3>
-          <i class="fas fa-map-marker-alt"></i> The Oberoi Amarvilas, Agra
-        </h3>
-        <p>
-          Built with splendid Mughal architecture, the Oberoi Amarvilas is the
-          best heritage hotel of Agra by some distance. Dotted with fountains
-          and lawns all around, it offers an unforgettable stay in a palam
-        </p>
-        <div class="stars">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-        </div>
-        <div class="price">₹ 3799.00 <span>₹ 4000.00</span></div>
-        <a href="#book" class="btn">book now</a>
-      </div>
-    </div>
+      
+      <!-- Individual hotel card -->
+      <img decoding="async" src="/media/{{ hotel_obj.images.first.image}}" alt="hotel images" />
 
-    <div class="box">
-      <img decoding="async" src="{% static 'img/p-3.jpg' %}" alt="" />
+
       <div class="content">
-        <h3>
-          <i class="fas fa-map-marker-alt"></i> The Oberoi Udaivilas, Udaypur
-        </h3>
-        <p>
-          Sprawled across 50 acres of ravishing landscape, this 5-star resort
-          offers panoramic views of Lake Pichola. Their suites feature grand
-          Rajasthani architecture and stylish interiors with iPod docks.
-        </p>
+        <!-- Hotel content -->
+        <h3>{{hotel_obj.hotel_name}}</h3>
+        <h4><i class="fas fa-map-marker-alt"></i> {{hotel_obj.place}}</h4>
+        <p>{{hotel_obj.description|truncatechars:80}}</p>
         <div class="stars">
+          <!-- Star rating -->
           <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
           <i class="far fa-star"></i>
         </div>
-        <div class="price">₹ 6799.00 <span>₹ 7000.00</span></div>
+
+        <div class="price">
+          <!-- Hotel price -->
+          ₹ {{hotel_obj.hotel_price}} <span>₹ {{hotel_obj.actual_price}}</span>
+        </div>
         <a href="#book" class="btn">book now</a>
+        <!-- Book now button -->
       </div>
     </div>
+    {% endfor %}
   </div>
 </section>
 
-<!-- footer section-->
-{% include 'footer.html' %}
+{% include 'footer.html' %} <!-- Include footer section -->

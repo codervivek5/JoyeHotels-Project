@@ -390,6 +390,9 @@ header .search-bar-container label:hover {
 .packages a h3:hover{
   color: var(--orange);
 }
+.packages .box-container{
+  display: flex;
+}
 
 .packages .box-container .box {
   flex: 1 1 30rem;
@@ -426,6 +429,10 @@ header .search-bar-container label:hover {
 .packages .box-container .box .content .stars i {
   font-size: 1.7rem;
   color: var(--orange);
+}
+
+.packages .box-container .box .content .stars{
+  display: none;
 }
 
 .packages .box-container .box .content .price {
@@ -724,6 +731,14 @@ header .search-bar-container label:hover {
   }
  
 }
+@media(max-width: 414px){
+  .packages .box-container .box .content p{
+    display: none;
+  }
+  .stars{
+    display: none;
+  }
+}
 @media (max-width: 395px) {
   header .icons p {
     font-size: small;
@@ -740,4 +755,21 @@ header .search-bar-container label:hover {
 
 #signup_form{
   display: none;
+}
+
+
+/* css for hotels page where place is not proper fix with css */
+
+/* Style for dropdowns */
+.dropdown {
+  width: 100%;
+  padding: 1rem;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  /* border-radius: 4px; */
+  transition: border-color 0.2s, background-color 0.2s;
+  background-color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #333;
 }

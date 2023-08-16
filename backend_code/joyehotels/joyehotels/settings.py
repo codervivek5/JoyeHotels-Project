@@ -118,8 +118,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# Define the filesystem path where static files will be collected.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Define the URL prefix for static files.
 STATIC_URL = '/static/'
+
+
+# Add the paths to your app's static directories.
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'home/static')]
+
+
+# Base url to serve media files
+MEDIA_URL = '/media/'
+
+# Path where media is stored'
+MEDIA_ROOT = str(BASE_DIR / 'media')
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'public/static')
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

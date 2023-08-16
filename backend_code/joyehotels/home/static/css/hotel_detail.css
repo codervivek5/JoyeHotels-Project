@@ -1,0 +1,128 @@
+/* Import the Nunito font */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap");
+
+/* Reset default styles */
+* {
+    font-family: "Nunito", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: all 0.2s linear;
+}
+:root {
+    --orange: #ffa500;
+  }
+
+.carousel-item {
+    height: 45vh;
+    object-fit: cover;
+}
+
+.container {
+    z-index: 5;
+    position: relative;
+    top: -2rem;
+}
+.container .left_card .card-body h5{
+    font-weight: bolder;
+}
+.container .left_card .card-body .booking_date{
+    border: 1px solid var(--orange);
+    display: inline-block;
+    border-radius: 7px;
+    padding: 10px;  
+}
+
+.container .left_card .card-body .booking_date img{
+    margin-right: 8px;
+}
+.container .right_card{
+    width: 25rem;
+    margin-left: 1rem;
+}
+.container .right_card ul li{
+    display: flex;
+    justify-content: space-between;
+}
+/* .container .right_card ul li:nth-child(4){
+    display: flex;
+    justify-content: space-evenly;
+} */
+.container .right_card .pay_section{
+    background-color: rgb(245, 235, 223);
+}
+.container .right_card .pay_section .total_pay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.container .right_card .total_pay .btn{
+    background-color: var(--orange);
+    border: none;
+    width: 90px;
+    transition: 0.3s;
+    /* box-shadow: 0px 0px 10px 2px #444444; */
+
+}
+
+.container .right_card .total_pay .btn:hover{
+    box-shadow: 0px 0px 10px 2px #444444;
+}
+
+
+.container .detail{
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+}
+h4{
+    display: flex;
+    font-weight: bolder;
+    justify-content: space-between;
+}
+.card-detail  {
+    width: 22%;
+    height: auto;
+}
+
+/* media query */
+
+@media(max-width: 414px) {
+
+    .container {
+        z-index: 5;
+        position: relative;
+        top: -5.6rem;
+
+    }
+    .container .right_card{
+        width: auto;
+        margin: 1rem 0px 0px 0px;
+    }
+    .container .detail{
+        flex-direction: column;
+    }
+    .carousel-item img {
+        /* height: 25vh; */
+        object-fit: cover;
+    }
+
+    .row .col {
+        /* display: flex;
+        flex-direction: row; */
+        width: auto;
+        margin: 0;
+    }
+
+    .row .col img {
+        display: flex;
+        height: 3rem;
+        width: 3rem;
+    }
+}

@@ -3,13 +3,22 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .models import (Amenities, Hotel)
 
 def home(request):
-    return render(request, 'home.html', {'user_authenticated': request.user.is_authenticated, 'user': request.user})
+
+    return render(request, 'home.html')
+
+def hotels(request):
+    amenities_obj = Amenities.objects.all()
+    hotel_obj = Hotel.objects.all()
+
+    context = {'amenities_obj':amenities_obj ,'hotel_obj':hotel_obj }
+    return render(request, 'hotels.html', context)
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('home') 
     
     if request.method == 'POST':
         username = request.POST['username']
@@ -65,5 +74,4 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-def hotels(request):
-    return render(request, 'hotels.html')
+
