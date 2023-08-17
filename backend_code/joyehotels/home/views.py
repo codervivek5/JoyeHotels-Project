@@ -17,7 +17,8 @@ def hotels(request):
     return render(request, 'hotels.html', context)
 
 def hotel_detail(request):
-    return HttpResponse("this is hotel detail page")
+    # return HttpResponse("this is hotel detail page")
+    return render (request , "hotel_detail.html")
 
 def login_view(request):
     if request.user.is_authenticated:
