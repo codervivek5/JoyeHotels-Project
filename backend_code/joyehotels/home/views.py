@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -15,6 +15,9 @@ def hotels(request):
 
     context = {'amenities_obj':amenities_obj ,'hotel_obj':hotel_obj }
     return render(request, 'hotels.html', context)
+
+def hotel_detail(request):
+    return HttpResponse("this is hotel detail page")
 
 def login_view(request):
     if request.user.is_authenticated:
