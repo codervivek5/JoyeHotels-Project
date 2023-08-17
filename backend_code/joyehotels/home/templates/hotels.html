@@ -1,6 +1,8 @@
-{% load static %} <!-- Load static files -->
+{% load static %}
+<!-- Load static files -->
 
-{% include 'navigation.html' %} <!-- Include navigation section -->
+{% include 'navigation.html' %}
+<!-- Include navigation section -->
 
 <section class="book" style="margin-top: 70px" id="book">
   <div class="row">
@@ -24,9 +26,7 @@
 
           {% for hotel_objs in hotel_obj %}
           <!-- Loop through available amenities -->
-          <option value="{{hotel_objs.place}}">
-            {{hotel_objs.place}}
-          </option>
+          <option value="{{hotel_objs.place}}">{{hotel_objs.place}}</option>
           {% endfor %}
         </select>
       </div>
@@ -78,16 +78,35 @@
     <!-- Loop through hotel objects -->
 
     <div class="box">
-      
       <!-- Individual hotel card -->
-      <img decoding="async" src="/media/{{ hotel_obj.images.first.image}}" alt="hotel images" />
-
+      <img
+      decoding="async"
+      src="/media/{{ hotel_obj.hotel_images.first.image }}"
+      alt="Hotel Images"
+    />
 
       <div class="content">
         <!-- Hotel content -->
         <h3>{{hotel_obj.hotel_name}}</h3>
         <h4><i class="fas fa-map-marker-alt"></i> {{hotel_obj.place}}</h4>
+        <!--
         <p>{{hotel_obj.description|truncatechars:80}}</p>
+        -->
+
+        <p>
+          {% for amenitie in hotel_obj.amenities.all %}
+          <b> {{amenitie.amenity_name}}</b>,
+          {% endfor %}
+
+        </p>
+
+
+
+
+        <span> <strong>Room count : {{hotel_obj.room_count}}</strong></span>
+
+        
+
         <div class="stars">
           <!-- Star rating -->
           <i class="fas fa-star"></i>
@@ -100,6 +119,8 @@
         <div class="price">
           <!-- Hotel price -->
           ₹ {{hotel_obj.hotel_price}} <span>₹ {{hotel_obj.actual_price}}</span>
+
+         
         </div>
         <a href="/hoteldetail" class="btn">book now</a>
         <!-- Book now button -->
@@ -109,4 +130,5 @@
   </div>
 </section>
 
-{% include 'footer.html' %} <!-- Include footer section -->
+{% include 'footer.html' %}
+<!-- Include footer section -->

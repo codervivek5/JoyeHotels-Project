@@ -16,9 +16,15 @@ def hotels(request):
     context = {'amenities_obj':amenities_obj ,'hotel_obj':hotel_obj }
     return render(request, 'hotels.html', context)
 
-def hotel_detail(request):
-    # return HttpResponse("this is hotel detail page")
-    return render (request , "hotel_detail.html")
+
+def hotel_detail(request, hotel_id):
+    try:
+        hotel_obj = Hotel.objects.get(uid=hotel_id)
+    except Hotel.DoesNotExist:
+        return render(request, '404.html')  # Display a custom 404 page or handle the case where the hotel doesn't exist
+
+    context = {'hotel_obj': hotel_obj}
+    return render(request, 'hotel_detail.html', context)
 
 def login_view(request):
     if request.user.is_authenticated:

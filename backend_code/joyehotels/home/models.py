@@ -37,8 +37,8 @@ class HotelImages(BaseModel):
     hotel = models.ForeignKey(Hotel, related_name="hotel_images", on_delete=models.CASCADE)
     image = models.ImageField(upload_to="hotel")
 
-    def __str__(self) -> str:
-        return self.image
+    def __str__(self):
+        return f"Image: {self.image.name}"
 
 class HotelBooking(BaseModel):
     hotel = models.ForeignKey(Hotel, related_name="hotel_booking", on_delete=models.CASCADE)
