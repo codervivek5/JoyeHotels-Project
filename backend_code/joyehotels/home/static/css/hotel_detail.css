@@ -80,6 +80,9 @@
   position: relative;
   top: -2rem;
 }
+.container .detail .left_card{
+  width: 70%;
+}
 
 .container .left_card .card-body h5 {
   font-weight: bolder;
@@ -95,9 +98,13 @@
 .container .left_card .card-body .booking_date img {
   margin-right: 8px;
 }
+.container .left_card .card-body .amenitie b  {
+  color: var(--orange);
+}
 
-.container .right_card {
-  width: 25rem;
+.container .detail .right_card {
+  width: 30%;
+  height: 70%;
   margin-left: 1rem;
 }
 
@@ -149,6 +156,10 @@ h4 {
     z-index: 5;
     position: relative;
     top: -5.6rem;
+  }
+
+  .container .left_card{
+    width: auto;
   }
 
   .container .right_card {

@@ -73,6 +73,7 @@
 }
 
 
+
 @media screen and (max-width: 768px) {
     /* Adjust the layout for medium-sized screens */
     .container {
@@ -113,6 +114,15 @@
         padding-left: 7px;
     }
 }
+/* @media screen and (max-width: 414px) {
+
+    .container .dropdown-section .find_btn{
+        margin: 0px;
+        position: relative;
+        top: 6px;
+    }
+
+} */
 
 @media screen and (max-width: 390px) {
     /* Additional adjustments for even smaller screens */

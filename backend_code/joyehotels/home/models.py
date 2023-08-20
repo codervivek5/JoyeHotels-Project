@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 import uuid
 
+
 # Create your models here.
 
 class BaseModel(models.Model):
@@ -28,6 +29,9 @@ class Hotel(BaseModel):
     place = models.CharField(max_length=100)
     amenities = models.ManyToManyField(Amenities)
     room_count = models.IntegerField(default=10)
+    
+
+
 
     def __str__(self) -> str:
         return self.hotel_name

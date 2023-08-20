@@ -1,3 +1,4 @@
+
 {% load static %}
 <!-- Load static files -->
 
@@ -11,11 +12,6 @@
       <!-- Form for booking -->
 
       <div class="inputBox">
-        <!-- Input box for selecting place -->
-        <input type="hidden" name="_subject" value="New submission!" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="_honey" style="display: none" />
-        <input type="hidden" name="_template" value="table" />
 
         <h3>Place</h3>
         <!-- <input type="text" name="Place" id="place" placeholder="place name" /> -->
@@ -74,60 +70,52 @@
 
   <!-- Hotel cards section -->
   <div class="box-container">
-    {% for hotel_obj in hotel_obj %}
-    <!-- Loop through hotel objects -->
+    {% if hotel_obj %}
+      {% for hotel_obj in hotel_obj %}
+      <!-- Loop through hotel objects -->
 
-    <div class="box">
-      <!-- Individual hotel card -->
-      <img
-      decoding="async"
-      src="/media/{{ hotel_obj.hotel_images.first.image }}"
-      alt="Hotel Images"
-    />
+      <div class="box">
+        <!-- Individual hotel card -->
+        <img decoding="async" src="/media/{{ hotel_obj.hotel_images.first.image }}" alt="Hotel Images" />
 
-      <div class="content">
-        <!-- Hotel content -->
-        <h3>{{hotel_obj.hotel_name}}</h3>
-        <h4><i class="fas fa-map-marker-alt"></i> {{hotel_obj.place}}</h4>
-        <!--
-        <p>{{hotel_obj.description|truncatechars:80}}</p>
-        -->
+        <div class="content">
+          <!-- Hotel content -->
+          <h3>{{hotel_obj.hotel_name}}</h3>
+          <h4><i class="fas fa-map-marker-alt"></i> {{hotel_obj.place}}</h4>
 
-        <p>
-          {% for amenitie in hotel_obj.amenities.all %}
-          <b> {{amenitie.amenity_name}}</b>,
-          {% endfor %}
+          <p>{{hotel_obj.description|truncatechars:80}}</p>
 
-        </p>
+          <p>
+            {% for amenitie in hotel_obj.amenities.all %}
+            <b> {{amenitie.amenity_name}}</b>,
+            {% endfor %}
+          </p>
 
+          <span> <strong>Room count : {{hotel_obj.room_count}}</strong></span>
 
+          <div class="stars">
+            <!-- Star rating -->
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
 
-
-        <span> <strong>Room count : {{hotel_obj.room_count}}</strong></span>
-
-        
-
-        <div class="stars">
-          <!-- Star rating -->
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
+          <div class="price">
+            <!-- Hotel price -->
+            ₹ {{hotel_obj.hotel_price}} <span>₹ {{hotel_obj.actual_price}}</span>
+          </div>
+          <a href="/hoteldetail/{{hotel_obj.uid}}" class="btn">book now</a>
+          <!-- Book now button -->
         </div>
-
-        <div class="price">
-          <!-- Hotel price -->
-          ₹ {{hotel_obj.hotel_price}} <span>₹ {{hotel_obj.actual_price}}</span>
-
-         
-        </div>
-        <a href="/hoteldetail" class="btn">book now</a>
-        <!-- Book now button -->
       </div>
-    </div>
-    {% endfor %}
+      {% endfor %}
+    {% else %}
+      {% include 'messages.html' %}
+    {% endif %}
   </div>
+
 </section>
 
 {% include 'footer.html' %}

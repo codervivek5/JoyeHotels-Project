@@ -11,7 +11,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
 
     path('hotels/', views.hotels, name='hotels'),
-    path('hoteldetail/', views.hotel_detail, name='hoteldetail'),
+    path('hoteldetail/<uid>/', views.hotel_detail, name='hoteldetail'),
     # path('contact/', views.contact, name='contact'),
     
 
