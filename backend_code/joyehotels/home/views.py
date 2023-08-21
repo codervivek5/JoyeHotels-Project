@@ -82,6 +82,7 @@ def hotel_detail(request, uid):
 
 
 # login view
+
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -89,15 +90,19 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        print("Username:", username)
-        print("Password:", password)
+        # print("Username:", username)
+        # print("Password:", password)
 
         user = authenticate(request, username=username, password=password)
 
-        print("User:", user)
+        # print("User:", user)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            # Check if there's a 'next' parameter in the URL
+            next_url = request.GET.get('next')
+            if next_url:
+                return redirect(next_url)  # Redirect to the 'next' URL
+            return redirect('home')  # Default redirect after login
         else:
             messages.error(request, 'Invalid username or password.')
 
@@ -143,3 +148,7 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+
+def payment(request):
+    return render(request , 'payment.html')

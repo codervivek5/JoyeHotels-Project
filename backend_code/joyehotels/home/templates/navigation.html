@@ -39,7 +39,7 @@
     <div class="icons">
       <i class="fas fa-search" id="search-btn"></i>
       
-      {% if user_authenticated %}
+      {% if user.is_authenticated %}
       <p>Hello, {{ user.username }}!</p>
       <a href="{% url 'logout' %}">Logout</a>
       

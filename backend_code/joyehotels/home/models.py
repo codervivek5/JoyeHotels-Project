@@ -28,7 +28,7 @@ class Hotel(BaseModel):
     gst_percentage = models.DecimalField(
         max_digits=5,
         decimal_places=2,
-        default=18,
+        default=18.00,
         help_text="GST percentage"
     ) 
     description = models.TextField()

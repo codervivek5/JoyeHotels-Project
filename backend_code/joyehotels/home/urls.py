@@ -12,6 +12,9 @@ urlpatterns = [
 
     path('hotels/', views.hotels, name='hotels'),
     path('hoteldetail/<uid>/', views.hotel_detail, name='hoteldetail'),
+
+    
+    path('payment/', views.payment, name='payment'),
     # path('contact/', views.contact, name='contact'),
     
 
