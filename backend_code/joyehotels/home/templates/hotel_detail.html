@@ -136,7 +136,7 @@
                         {% if hotel_discount > 0 %}- {% endif %}₹{{hotel_discount }}</span>
                     </li>
 
-                    <li class="list-group-item">GST 18% <span>+ ₹180</span></li>
+                    <li class="list-group-item">GST {{gst_percentage}}% <span>+ ₹{{gst_amount}}</span></li>
 
                     <li class="list-group-item">Total Amount <span>=</span> <span> ₹{{total_amount}}</span></li>
                 </ul>

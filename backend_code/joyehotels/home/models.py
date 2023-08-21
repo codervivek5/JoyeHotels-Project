@@ -25,6 +25,12 @@ class Hotel(BaseModel):
     hotel_name = models.CharField(max_length=100)
     actual_price = models.IntegerField(default=1000)
     hotel_price = models.IntegerField()
+    gst_percentage = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        default=18,
+        help_text="GST percentage"
+    ) 
     description = models.TextField()
     place = models.CharField(max_length=100)
     amenities = models.ManyToManyField(Amenities)

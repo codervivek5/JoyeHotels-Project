@@ -53,9 +53,10 @@ def hotel_detail(request, uid):
         hotel_obj = None
 
     if hotel_obj:
-        # Calculate the total amount
-        # Assuming GST is a fixed value of ₹180
-        total_amount = hotel_obj.hotel_price + 180
+         # Calculate the total amount including GST
+        gst_percentage = hotel_obj.gst_percentage
+        gst_amount = (gst_percentage / 100) * hotel_obj.hotel_price
+        total_amount = hotel_obj.hotel_price + gst_amount
 
         # Calculate the price to pay (after applying the instant discount)
         discount = hotel_obj.actual_price - hotel_obj.hotel_price
@@ -65,7 +66,9 @@ def hotel_detail(request, uid):
 
         context = {
             'hotel_obj': hotel_obj,
+            'gst_percentage':gst_percentage,
             'hotel_discount': hotel_discount,
+            'gst_amount':gst_amount,
             'total_amount': total_amount,
 
         }
