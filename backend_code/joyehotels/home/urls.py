@@ -15,7 +15,7 @@ urlpatterns = [
 
     
     path('payment/', views.payment, name='payment'),
-    # path('contact/', views.contact, name='contact'),
+    path('contact/', views.contact, name='contact'),
     
 
 ]

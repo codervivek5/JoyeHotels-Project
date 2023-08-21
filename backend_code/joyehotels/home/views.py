@@ -152,3 +152,6 @@ def logout_view(request):
 
 def payment(request):
     return render(request , 'payment.html')
+
+def contact_view(request):
+    pass
