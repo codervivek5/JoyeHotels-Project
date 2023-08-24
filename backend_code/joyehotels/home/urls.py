@@ -11,11 +11,11 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
 
     path('hotels/', views.hotels, name='hotels'),
-    path('hoteldetail/<uid>/', views.hotel_detail, name='hoteldetail'),
+    path('hoteldetail/<uuid:uid>/', views.hotel_detail, name='hoteldetail'),
 
     
-    path('payment/', views.payment, name='payment'),
-    path('contact/', views.contact, name='contact'),
+    path('contact/', views.contact_view, name='contact'),
+    path('payment/<uuid:uid>/', views.payment, name='payment'),
     
 
 ]

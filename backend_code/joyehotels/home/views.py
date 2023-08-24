@@ -5,6 +5,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import (Amenities, Hotel)
 from django.db.models import Q
+import razorpay
+from django.conf import settings
+from django.urls import reverse
 
 
 def home(request):
@@ -37,14 +40,14 @@ def hotels(request):
 
     context = {'amenities_obj': amenities_obj,
                'hotel_obj': hotel_obj,
-                'sort_by': sort_by, 
-                'search': search
-    }
+               'sort_by': sort_by,
+               'search': search
+               }
     return render(request, 'hotels.html', context)
 
 
-
 # hotel detail view....................................
+
 
 def hotel_detail(request, uid):
     try:
@@ -53,7 +56,7 @@ def hotel_detail(request, uid):
         hotel_obj = None
 
     if hotel_obj:
-         # Calculate the total amount including GST
+        # Calculate the total amount including GST
         gst_percentage = hotel_obj.gst_percentage
         gst_amount = (gst_percentage / 100) * hotel_obj.hotel_price
         total_amount = hotel_obj.hotel_price + gst_amount
@@ -66,9 +69,9 @@ def hotel_detail(request, uid):
 
         context = {
             'hotel_obj': hotel_obj,
-            'gst_percentage':gst_percentage,
+            'gst_percentage': gst_percentage,
             'hotel_discount': hotel_discount,
-            'gst_amount':gst_amount,
+            'gst_amount': gst_amount,
             'total_amount': total_amount,
 
         }
@@ -144,14 +147,84 @@ def register_view(request):
     # Show the registration form for non-authenticated users
     return render(request, 'register.html')
 
+# logout view
+
 
 def logout_view(request):
     logout(request)
     return redirect('home')
 
+# Contact us view
 
-def payment(request):
-    return render(request , 'payment.html')
 
 def contact_view(request):
-    pass
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        number = request.POST.get('number')
+        subject = request.POST.get('subject')
+        message = request.POST.get('Message')
+
+    return render(request, 'contact.html')
+
+
+# _________Razorpay payment integration _______________
+# Create a Razorpay client
+razorpay_client = razorpay.Client(
+    auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+
+def payment(request, uid):
+    try:
+        hotel_obj = Hotel.objects.get(uid=uid)
+    except Hotel.DoesNotExist:
+        hotel_obj = None
+
+    if hotel_obj:
+        # Calculate the total amount including GST
+        gst_percentage = hotel_obj.gst_percentage
+        gst_amount = (gst_percentage / 100) * hotel_obj.hotel_price
+        total_amount = hotel_obj.hotel_price + gst_amount
+
+        # Calculate the price to pay (after applying the instant discount)
+        discount = hotel_obj.actual_price - hotel_obj.hotel_price
+
+        # Make sure hotel_discount is not negative
+        hotel_discount = max(discount, 0)
+
+        # Create a Razorpay order
+        # Amount in paise (100 paise = ₹1)
+        order_amount = int(total_amount * 100)
+        order_currency = 'INR'
+        # Replace with a unique order identifier
+        order_receipt = f'order_{str(hotel_obj.uid)[:30]}'
+
+        try:
+            order = razorpay_client.order.create({
+                'amount': order_amount,
+                'currency': order_currency,
+                'receipt': order_receipt,
+                'payment_capture': 1,  # Auto-capture payment
+            })
+        except Exception as e:
+            # Handle any errors that occur during Razorpay order creation
+            messages.error(
+                request, "An error occurred while processing your payment.")
+            # Redirect to home page or an error page
+            return redirect(reverse('hoteldetail', args=[uid]))
+
+        context = {
+            'hotel_obj': hotel_obj,
+            'gst_percentage': gst_percentage,
+            'hotel_discount': hotel_discount,
+            'gst_amount': gst_amount,
+            'total_amount': total_amount,
+            # Pass the Razorpay order ID to the template
+            'order_id': order['id'],
+        }
+
+        return render(request, 'success_payment.html', context)
+    else:
+        # Handle the case where the hotel with the given UID does not exist
+        messages.error(request, "Hotel not found")
+        return redirect(reverse('hotels'))

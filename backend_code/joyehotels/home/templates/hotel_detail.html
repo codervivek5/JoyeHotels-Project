@@ -5,7 +5,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>JoyeHotels - details</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
@@ -18,17 +17,17 @@
 
 <body>
     <!-- Add back button-->
-    <div class="back-button">
+  <!--   <div class="back-button">
         <a href="javascript:history.back()">
-            <i class="fas fa-chevron-left"></i> Back
-        </a>
-    </div>
-
-    <!--  <div class="back-button">
-        <a href="/hotels" onclick="goBack()">
-            <i class="fas fa-chevron-left"></i> Back
+            <i class="fas fa-chevron-left"></i> Back to home
         </a>
     </div> -->
+
+     <div class="back-button">
+        <a href="/hotels" onclick="goBack()">
+            <i class="fas fa-chevron-left"></i> Back to home
+        </a>
+    </div> 
 
     <div id="carouselExampleIndicators" class="carousel slide">
         <!-- <div class="carousel-indicators">
@@ -131,7 +130,8 @@
                     <li class="list-group-item">
                         Instant discount
                         <span>
-                            {% if hotel_discount > 0 %}- {% endif %}₹ {{hotel_discount}}</span>
+                            {% if hotel_discount > 0 %}- {% endif %}₹
+                            {{hotel_discount}}</span>
                     </li>
 
                     <li class="list-group-item">
@@ -148,17 +148,17 @@
                             <span> Price to pay : </span>₹ {{total_amount}}</span>
 
                         {% if user.is_authenticated %}
-                        <a href="{% url 'payment' %}" class="btn btn-success">Pay</a>
+                        <button href="{% url 'payment' uid=hotel_obj.uid  %}" class="btn btn-success" id="rzp-button1">
+                            Pay
+                        </button>
                         {% else %}
-                        <a href="{% url 'login' %}?next={% url 'payment' %}" class="btn btn-success">Login to Pay</a>
+                        <a href="{% url 'login' %}?next={% url 'hoteldetail' uid=hotel_obj.uid%}" class="btn btn-success">
+                            Login to Pay
+                        </a>
                         {% endif %}
                     </div>
 
-                    <!-- <div class="price">
-                       
-                        ₹ {{hotel_obj.hotel_price}} <span></span>
-                    </div>
-                    <a href="#book" class="btn">book now</a> -->
+
                 </div>
             </div>
         </section>
@@ -173,6 +173,57 @@
             window.history.back();
         }
     </script>
+
+  <!-- Razorpay payment Integration -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+    
+    // Calculate the total amount in paisa (100x the amount in INR)
+    var totalAmount = {{ total_amount }} * 100;
+    
+    // Razorpay payment options
+    var options = {
+        key: "rzp_test_ha0ktmZzSu1erb", // Replace with your Razorpay Key ID
+        amount: totalAmount, // Total amount in paisa
+        currency: "INR",
+        name: "JoyeHotels",
+        description: "Hotel Description",
+        image: "{% static 'img/logo.png' %}", // Replace with your logo image URL
+        order_id: '{{ order_id }}', // Replace with your order ID
+        "prefill": {
+            "name": "{{ user.username }}",
+            "email": "{{ user.email }}",
+        },
+        
+        // Callback function when payment is successful
+        handler: function (response) {
+            alert(response.razorpay_payment_id);
+        },
+        
+        // Modal dismissal callback
+        modal: {
+            ondismiss: function () {
+                if (confirm("Are you sure you want to close the form?")) {
+                    console.log("Checkout form closed by the user");
+                } else {
+                    console.log("Complete the Payment");
+                }
+            },
+        },
+    };
+    
+    // Create a new Razorpay instance
+    var rzp1 = new Razorpay(options);
+    
+    // Open the Razorpay payment form when the button is clicked
+    document.getElementById("rzp-button1").onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+    };
+</script>
+
 </body>
 
 </html>

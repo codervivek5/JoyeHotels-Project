@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 import uuid
 
 
@@ -36,9 +37,6 @@ class Hotel(BaseModel):
     amenities = models.ManyToManyField(Amenities)
     room_count = models.IntegerField(default=10)
     
-
-
-
     def __str__(self) -> str:
         return self.hotel_name
 
@@ -53,7 +51,19 @@ class HotelImages(BaseModel):
 class HotelBooking(BaseModel):
     hotel = models.ForeignKey(Hotel, related_name="hotel_booking", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='user_booking', on_delete=models.CASCADE)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    start_date = models.DateTimeField(default = timezone.now)
+    end_date = models.DateTimeField(default = timezone.now)
     booking_type = models.CharField(max_length=30, choices=(('pre_paid', 'pre paid'), ('post_paid', 'post paid')))
 
+    def __str__(self):
+        return f"Booking for {self.hotel.hotel_name} by {self.user.username}"
+
+class Contact(BaseModel):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    number = models.CharField(max_length=20, default='')
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"Contact from {self.name}"

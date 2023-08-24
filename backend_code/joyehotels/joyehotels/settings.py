@@ -154,3 +154,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+# razorpay api key
+RAZORPAY_KEY_ID = 'rzp_test_ha0ktmZzSu1erb'
+RAZORPAY_KEY_SECRET = 'wK6gBtUmuGmIUZAqTPhH8lr5'
+
+
