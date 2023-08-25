@@ -38,6 +38,13 @@ def hotels(request):
                 amenities__amenity_name__icontains=search)
         ).distinct()
 
+    # query for Ameenities 
+    amenities =  search = request.GET.getlist('amenities')
+    print(amenities)
+
+    if len(amenities):
+        hotel_obj = hotel_obj.filter(amenities__amenity_name__in = amenities).distinct()
+
     context = {'amenities_obj': amenities_obj,
                'hotel_obj': hotel_obj,
                'sort_by': sort_by,

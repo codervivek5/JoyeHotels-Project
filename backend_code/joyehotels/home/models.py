@@ -36,6 +36,9 @@ class Hotel(BaseModel):
     place = models.CharField(max_length=100)
     amenities = models.ManyToManyField(Amenities)
     room_count = models.IntegerField(default=10)
+
+      # Add the order_id field to store Razorpay order ID
+    order_id = models.CharField(max_length=255, blank=True, null=True)
     
     def __str__(self) -> str:
         return self.hotel_name

@@ -51,8 +51,8 @@
       <!-- Amenities section-->
       <section class="dropdown-section">
         <h2>Amenities</h2>
-        <select class="dropdown" name="amenities">
-          <option value="" disabled selected>--choose--</option>
+        <select class="dropdown" name="amenities" multiple>
+          <option value="" disabled selected>-none selected-</option>
 
           {% for amenities_obj in amenities_obj %}
           <option value="{{amenities_obj.amenity_name}}">{{amenities_obj.amenity_name}}</option>
