@@ -149,7 +149,7 @@
 
                         {% if user.is_authenticated %}
                         <button href="{% url 'payment' uid=hotel_obj.uid  %}" class="btn btn-success" id="rzp-button1">
-                            Pay
+                            Pay 
                         </button>
                         {% else %}
                         <a href="{% url 'login' %}?next={% url 'hoteldetail' uid=hotel_obj.uid%}" class="btn btn-success">
@@ -197,10 +197,21 @@
             "email": "{{ user.email }}",
         },
         
+        
         // Callback function when payment is successful
+
         handler: function (response) {
-            alert(response.razorpay_payment_id);
-        },
+        // Get the Razorpay payment ID
+        var paymentId = response.razorpay_payment_id;
+        
+        // Get the UID from the URL
+        var uid = '{{ hotel_obj.uid }}';
+
+        // Redirect to the payment success page with the payment ID and UID
+        window.location.href = "{% url 'payment' uid=hotel_obj.uid %}?payment_id=" + paymentId;
+
+
+},
         
         // Modal dismissal callback
         modal: {

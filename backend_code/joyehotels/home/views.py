@@ -210,7 +210,7 @@ def payment(request, uid):
             # Handle any errors that occur during Razorpay order creation
             messages.error(
                 request, "An error occurred while processing your payment.")
-            # Redirect to home page or an error page
+            # Redirect to hotel detail page or an error page
             return redirect(reverse('hoteldetail', args=[uid]))
 
         context = {
@@ -218,6 +218,7 @@ def payment(request, uid):
             'gst_percentage': gst_percentage,
             'hotel_discount': hotel_discount,
             'gst_amount': gst_amount,
+            'uid': uid,  # Pass the UID here
             'total_amount': total_amount,
             # Pass the Razorpay order ID to the template
             'order_id': order['id'],
@@ -228,3 +229,7 @@ def payment(request, uid):
         # Handle the case where the hotel with the given UID does not exist
         messages.error(request, "Hotel not found")
         return redirect(reverse('hotels'))
+
+
+# def pay(request):
+#     return render(request , 'success_payment.html')
