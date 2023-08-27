@@ -6,19 +6,22 @@
 <!-- Include navigation section -->
 {% block title %}JoyeHotels - Hotels{% endblock title %}
 
+
+
 <section class="book" style="margin-top: 70px" id="book">
   <div class="row">
     
-    <form method="POST">
+    <form method="POST" action="{% url 'hotels' uid=hotel_obj.uid %}">
+
       {% csrf_token %}
       <!-- Form for booking -->
-
+ 
       <div class="inputBox">
 
         <h3>Place</h3>
         <!-- <input type="text" name="Place" id="place" placeholder="place name" /> -->
 
-        <select class="dropdown">
+        <select class="dropdown" name="place">
           <!-- Dropdown for selecting place -->
           <option value="" disabled selected>--choose--</option>
 
@@ -37,14 +40,14 @@
       <div class="inputBox">
         <!-- Input box for check-in date -->
         <h3>arrivals</h3>
-        <input type="date" name="Check_in_date" id="checkInDate" />
+        <input type="date" name="Check_in" id="checkInDate" />
       </div>
       <div class="inputBox">
         <!-- Input box for check-out date -->
         <h3>leaving</h3>
-        <input type="date" name="Check_out_date" id="checkOutDate" />
+        <input type="date" name="Check_out" id="checkOutDate" />
       </div>
-      <input type="submit" class="btn" value="book now" />
+      <input type="submit" class="btn" value="check availability" />
       <!-- Submit button for booking -->
     </form>
 
