@@ -10,8 +10,9 @@
 
 <section class="book" style="margin-top: 70px" id="book">
   <div class="row">
+    {% include 'messages.html' %}
     
-    <form method="POST" action="{% url 'hotels' uid=hotel_obj.uid %}">
+    <form method="POST">
 
       {% csrf_token %}
       <!-- Form for booking -->
@@ -47,7 +48,9 @@
         <h3>leaving</h3>
         <input type="date" name="Check_out" id="checkOutDate" />
       </div>
-      <input type="submit" class="btn" value="check availability" />
+
+      <button type="submit" class="btn">Check Availability</button>
+
       <!-- Submit button for booking -->
     </form>
 

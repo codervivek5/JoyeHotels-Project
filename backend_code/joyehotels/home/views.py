@@ -9,6 +9,7 @@ from django.db.models import Q
 import razorpay
 from django.conf import settings
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 
 def home(request):
@@ -26,35 +27,39 @@ def check_booking(start_date, end_date, uid, room_count):
 
     if len(qs) >= room_count:
         return False
-
+ 
     return True
 
-# Hotels page logic
+# Hotels view page logic
 
-
-def hotels(request, uid):
+def hotels(request,uid):
     amenities_obj = Amenities.objects.all()
-    hotel_obj = Hotel.objects.all()
+    hotel_obj = Hotel.objects.all()  # Initialize hotel_obj here
 
     # booking checking logic
     if request.method == 'POST':
         Check_in = request.POST.get('Check_in')
         Check_out = request.POST.get('Check_out')
-        # hotel = Hotel.objects.get(uid=uid)
-
-        if not check_booking(Check_in, Check_out, uid, hotel_obj.room_count):
+        
+        # Get hotel_obj based on UID in the POST data
+        uid = request.POST.get('uid')
+        hotel_obj = get_object_or_404(Hotel, uid=uid)
+        
+        if not check_booking(Check_in, Check_out,  hotel_obj.room_count):
             messages.warning(request, 'Hotel is already booked in these dates ')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         HotelBooking.objects.create(
-            hotel= hotel_obj, 
+            hotel=hotel_obj,
             user=request.user,
-            start_date=Check_in, 
-            end_date=Check_out, 
-            booking_type='Pre Paid')
+            start_date=Check_in,
+            end_date=Check_out,
+            booking_type='Pre Paid'
+        )
 
         messages.success(request, 'Your booking has been saved')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
 
     # query for sorting
     sort_by = request.GET.get('sort_by')
