@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404
 
 
 def home(request):
+
     return render(request, 'home.html')
 
 # function for booking checking
@@ -27,12 +28,13 @@ def check_booking(start_date, end_date, uid, room_count):
 
     if len(qs) >= room_count:
         return False
- 
+
     return True
 
-# Hotels view page logic
+# Hotels page logic
 
-def hotels(request,uid):
+
+def hotels(request):
     amenities_obj = Amenities.objects.all()
     hotel_obj = Hotel.objects.all()  # Initialize hotel_obj here
 
@@ -40,26 +42,21 @@ def hotels(request,uid):
     if request.method == 'POST':
         Check_in = request.POST.get('Check_in')
         Check_out = request.POST.get('Check_out')
-        
-        # Get hotel_obj based on UID in the POST data
-        uid = request.POST.get('uid')
-        hotel_obj = get_object_or_404(Hotel, uid=uid)
-        
+        # hotel = Hotel.objects.get(uid=uid)
+
         if not check_booking(Check_in, Check_out,  hotel_obj.room_count):
             messages.warning(request, 'Hotel is already booked in these dates ')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         HotelBooking.objects.create(
-            hotel=hotel_obj,
+            hotel= hotel_obj, 
             user=request.user,
-            start_date=Check_in,
-            end_date=Check_out,
-            booking_type='Pre Paid'
-        )
+            start_date=Check_in, 
+            end_date=Check_out, 
+            booking_type='Pre Paid')
 
         messages.success(request, 'Your booking has been saved')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    
 
     # query for sorting
     sort_by = request.GET.get('sort_by')
@@ -80,13 +77,12 @@ def hotels(request,uid):
                 amenities__amenity_name__icontains=search)
         ).distinct()
 
-    # query for Amenities
-    amenities = search = request.GET.getlist('amenities')
+    # query for Ameenities 
+    amenities =  search = request.GET.getlist('amenities')
     print(amenities)
 
     if len(amenities):
-        hotel_obj = hotel_obj.filter(
-            amenities__amenity_name__in=amenities).distinct()
+        hotel_obj = hotel_obj.filter(amenities__amenity_name__in = amenities).distinct()
 
     context = {'amenities_obj': amenities_obj,
                'hotel_obj': hotel_obj,
